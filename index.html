@@ -4,47 +4,275 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>boven.se</title>
-  <meta name="description" content="boven.se – kommer snart.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <meta name="description" content="boven.se – sidoprojekt, prototyper och experiment.">
+  <meta name="theme-color" content="#0033cc">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230033cc'/><rect x='4' y='4' width='8' height='8' fill='%23fff'/></svg>">
   <style>
     :root {
-      --bg: #faf9f6;
-      --fg: #1a1a1a;
-      --muted: #6b6b6b;
-      color-scheme: light dark;
+      --navy:  #0a1a7a;
+      --blue:  #0033cc;
+      --cobalt:#2a5cff;
+      --sky:   #8fb8ff;
+      --pale:  #dde7ff;
+      --paper: #ececea;
+      --white: #ffffff;
+      --ink:   #0a0f33;
+      --edge:  3px solid var(--ink);
+      --shadow: 6px 6px 0 var(--ink);
+      --mono: "Courier New", Courier, ui-monospace, monospace;
+      --sans: Verdana, Geneva, Tahoma, sans-serif;
     }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #121212; --fg: #ededed; --muted: #9a9a9a; }
-    }
-    * { box-sizing: border-box; margin: 0; }
-    html, body { height: 100%; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      display: grid;
-      place-items: center;
-      padding: 1.5rem;
-      background: var(--bg);
-      color: var(--fg);
-      font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      text-align: center;
+      background: var(--paper);
+      background-image: radial-gradient(#c9c9c4 1px, transparent 1px);
+      background-size: 16px 16px;
+      color: var(--ink);
+      font: 15px/1.6 var(--sans);
     }
-    h1 { font-size: clamp(2.5rem, 10vw, 5rem); font-weight: 700; letter-spacing: -0.03em; }
-    p { color: var(--muted); font-size: 1.125rem; }
-    ul { list-style: none; padding: 0; margin-top: 2rem; }
-    li + li { margin-top: 0.5rem; }
-    a { color: inherit; }
+    a { color: var(--blue); }
+    a:hover { background: var(--blue); color: var(--white); }
+
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+    /* Toppremsa */
+    .strip {
+      background: var(--navy);
+      color: var(--sky);
+      font: 13px/1 var(--mono);
+      padding: 10px 0;
+      letter-spacing: 0.05em;
+    }
+    .strip .wrap { display: flex; justify-content: space-between; gap: 1rem; }
+    .blink { animation: blink 1.1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* Blockrutnät */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin: 32px auto;
+    }
+    .block {
+      border: var(--edge);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    /* Hero */
+    .hero {
+      grid-column: span 4;
+      background: var(--blue);
+      color: var(--white);
+      padding: 40px 28px 28px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero h1 {
+      font: 900 clamp(3.5rem, 13vw, 8rem)/0.85 var(--sans);
+      letter-spacing: -0.06em;
+      text-transform: lowercase;
+    }
+    .hero h1 span { color: var(--sky); }
+    .hero p { font: 15px/1.4 var(--mono); margin-top: 16px; color: var(--pale); }
+
+    .tiles {
+      grid-column: span 2;
+      display: grid;
+      grid-template: 1fr 1fr / 1fr 1fr;
+      gap: 16px;
+    }
+    .tiles div { border: var(--edge); box-shadow: var(--shadow); min-height: 80px; }
+    .tiles div:nth-child(1) { background: var(--navy); }
+    .tiles div:nth-child(2) { background: var(--sky); }
+    .tiles div:nth-child(3) { background: var(--white); }
+    .tiles div:nth-child(4) { background: var(--cobalt); }
+
+    /* Fönster */
+    .window { background: var(--white); padding: 0; }
+    .titlebar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--navy);
+      color: var(--white);
+      font: bold 13px/1 var(--mono);
+      padding: 8px 10px;
+      border-bottom: var(--edge);
+    }
+    .titlebar i {
+      display: inline-block;
+      width: 12px; height: 12px;
+      margin-left: 4px;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+    }
+    .window .body { padding: 20px 24px 24px; }
+    .window h2, .section-title {
+      font: bold 13px/1 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .window p + p { margin-top: 0.8em; }
+
+    .about { grid-column: span 4; }
+    .quote {
+      grid-column: span 2;
+      background: var(--sky);
+      font: bold 22px/1.25 var(--sans);
+      display: flex;
+      align-items: flex-end;
+    }
+
+    /* Projekt */
+    .section-title {
+      grid-column: 1 / -1;
+      background: var(--ink);
+      color: var(--white);
+      padding: 12px 16px;
+      margin: 16px 0 0;
+      font-size: 15px;
+    }
+    .project {
+      grid-column: span 3;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 200px;
+      color: var(--white);
+      text-decoration: none;
+      transition: transform 0.08s, box-shadow 0.08s;
+    }
+    .project h3 { font: 900 28px/1.05 var(--sans); letter-spacing: -0.03em; }
+    .project p { flex: 1; }
+    .project.navy   { background: var(--navy); }
+    .project.cobalt { background: var(--cobalt); }
+    .project.pale   { background: var(--pale); color: var(--ink); }
+    .project.white  { background: var(--white); color: var(--ink); }
+    a.project:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+    .tag {
+      align-self: flex-start;
+      font: bold 12px/1 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 6px 8px;
+      background: var(--white);
+      color: var(--blue);
+      border: 2px solid var(--ink);
+    }
+    .project.white .tag, .project.pale .tag { background: var(--blue); color: var(--white); }
+    .project.ghost {
+      grid-column: 1 / -1;
+      min-height: 90px;
+      background: transparent;
+      box-shadow: none;
+      border-style: dashed;
+      color: var(--blue);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font: bold 15px/1.4 var(--mono);
+    }
+
+    /* Sidfot */
+    footer {
+      background: var(--navy);
+      color: var(--sky);
+      font: 13px/1.5 var(--mono);
+      padding: 24px 0;
+      margin-top: 48px;
+      border-top: var(--edge);
+    }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex;
+      width: 88px; height: 31px;
+      border: 2px solid var(--white);
+      font: bold 10px/1 var(--mono);
+      text-transform: uppercase;
+    }
+    .badge b { background: var(--white); color: var(--navy); padding: 0 5px; display: grid; place-items: center; }
+    .badge span { flex: 1; display: grid; place-items: center; color: var(--white); background: var(--blue); }
+
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .hero, .about, .quote, .project, .tiles { grid-column: 1 / -1; }
+      .tiles { grid-template: 60px / repeat(4, 1fr); }
+      .tiles div { min-height: 0; }
+      .hero { min-height: 220px; }
+      .project { min-height: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .blink { animation: none; }
+      .project { transition: none; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>boven</h1>
-    <p>Kommer snart.</p>
+  <div class="strip">
+    <div class="wrap">
+      <span>BOVEN.SE</span>
+      <span>C:\&gt; välkommen<span class="blink">_</span></span>
+    </div>
+  </div>
 
-    <!-- Projekt – avkommentera och lägg till när de är live:
-    <ul>
-      <li><a href="https://rated.boven.se">Under/overrated</a></li>
-      <li><a href="https://fraga.boven.se">Fråga svenskarna</a></li>
-    </ul>
-    -->
+  <main class="wrap grid">
+    <header class="block hero">
+      <h1>boven<span>.se</span></h1>
+      <p>Sidoprojekt, prototyper &amp; experiment.</p>
+    </header>
+
+    <div class="tiles" aria-hidden="true">
+      <div></div><div></div><div></div><div></div>
+    </div>
+
+    <section class="block window about">
+      <div class="titlebar"><span>om_mig.txt</span><span><i></i><i></i></span></div>
+      <div class="body">
+        <h2>Om mig</h2>
+        <p>Hej! Det här är min lilla hörna av webben. Här samlar jag saker jag bygger på fritiden – små sajter, prototyper och idéer som jag vill testa på riktigt.</p>
+        <p>Allt är handbyggt, lite ofärdigt och under ständig konstruktion. Precis som webben var förr.</p>
+      </div>
+    </section>
+
+    <aside class="block quote">
+      <p>Bygg saker. Visa upp dem. Bygg fler.</p>
+    </aside>
+
+    <h2 class="section-title">▦ Projekt</h2>
+
+    <!-- När ett projekt går live: byt <div> mot <a href="https://…"> och uppdatera taggen. -->
+    <div class="block project navy">
+      <span class="tag">Kommer snart</span>
+      <h3>Under/overrated</h3>
+      <p>Är det underskattat eller överskattat? Tyck till om allt möjligt.</p>
+    </div>
+
+    <div class="block project pale">
+      <span class="tag">Prototyp</span>
+      <h3>Fråga svenskarna</h3>
+      <p>Vad tycker svenskarna egentligen? Ett experiment i att ställa frågor till hela landet.</p>
+    </div>
+
+    <div class="block project ghost">
+      <p>+ fler projekt<br>under konstruktion</p>
+    </div>
   </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 boven.se · Handkodad. Inga cookies.</span>
+      <span class="badges" aria-hidden="true">
+        <span class="badge"><b>HTML</b><span>för hand</span></span>
+        <span class="badge"><b>0kb</b><span>js</span></span>
+      </span>
+    </div>
+  </footer>
 </body>
 </html>
