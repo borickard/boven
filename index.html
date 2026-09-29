@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>boven.se</title>
+  <meta name="description" content="boven.se – kommer snart.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --fg: #1a1a1a;
+      --muted: #6b6b6b;
+      color-scheme: light dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #121212; --fg: #ededed; --muted: #9a9a9a; }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      background: var(--bg);
+      color: var(--fg);
+      font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      text-align: center;
+    }
+    h1 { font-size: clamp(2.5rem, 10vw, 5rem); font-weight: 700; letter-spacing: -0.03em; }
+    p { color: var(--muted); font-size: 1.125rem; }
+    ul { list-style: none; padding: 0; margin-top: 2rem; }
+    li + li { margin-top: 0.5rem; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>boven</h1>
+    <p>Kommer snart.</p>
+
+    <!-- Projekt – avkommentera och lägg till när de är live:
+    <ul>
+      <li><a href="https://rated.boven.se">Under/overrated</a></li>
+      <li><a href="https://fraga.boven.se">Fråga svenskarna</a></li>
+    </ul>
+    -->
+  </main>
+</body>
+</html>
