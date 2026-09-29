@@ -156,6 +156,12 @@
       padding: 4px 8px; background: var(--white); border: 2px solid var(--ink); border-radius: 4px;
     }
 
+    /* Projektmapp */
+    .folder .panel { background: var(--white); padding: 14px 10px; }
+    .folder-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 10px 4px; }
+    .folder-icons .icon { width: auto; }
+    .folder-status { font-size: 12px; font-weight: bold; padding: 5px 2px 0; }
+
     /* Felruta */
     .error .panel { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
     .error .bang {
@@ -312,6 +318,25 @@
       <circle cx="20" cy="9" r="2.6" fill="#ff9c0f" stroke="#161616" stroke-width="1.5"/>
       <circle cx="24" cy="14.5" r="2.6" fill="#13a0a6" stroke="#161616" stroke-width="1.5"/>
     </symbol>
+    <symbol id="i-folder" viewBox="0 0 32 32">
+      <path d="M3 8a2 2 0 012-2h7l3 3h12a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2z" fill="#ff9c0f" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M3 13h26" stroke="#161616" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="i-rocket" viewBox="0 0 32 32">
+      <path d="M16 3c5 3 7 9 6 16h-12c-1-7 1-13 6-16z" fill="#e4d4ff" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+      <circle cx="16" cy="12" r="3" fill="#5a3cff" stroke="#161616" stroke-width="2"/>
+      <path d="M10 15l-4 5v3l4-2zM22 15l4 5v3l-4-2z" fill="#ff17d8" stroke="#161616" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M13 19l-1 6 4-2 4 2-1-6" fill="#ff9c0f" stroke="#161616" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 32 32">
+      <ellipse cx="16" cy="6" rx="8" ry="3" fill="none" stroke="#161616" stroke-width="2.5"/>
+      <ellipse cx="16" cy="6" rx="8" ry="3" fill="none" stroke="#ffe23a" stroke-width="1.2"/>
+      <path d="M16 10l3.5 7 7.5 1-5.5 5.2 1.3 7.3L16 27l-6.8 3.5 1.3-7.3L5 18l7.5-1z" fill="#13a0a6" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-bubble" viewBox="0 0 32 32">
+      <path d="M5 6h22a2 2 0 012 2v13a2 2 0 01-2 2H14l-6 5v-5H5a2 2 0 01-2-2V8a2 2 0 012-2z" fill="#ffb3f2" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M9 12h14M9 17h9" stroke="#161616" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
     <symbol id="i-logo" viewBox="0 0 20 20">
       <rect x="1.5" y="1.5" width="7.5" height="7.5" rx="1" fill="#ff9c0f" stroke="#161616" stroke-width="1.5"/>
       <rect x="11" y="1.5" width="7.5" height="7.5" rx="1" fill="#e4d4ff" stroke="#161616" stroke-width="1.5"/>
@@ -333,8 +358,7 @@
 
     <nav class="icons" aria-label="Skrivbord">
       <button class="icon" data-open="w-about"><svg><use href="#i-notepad"/></svg><span>om_mig.txt</span></button>
-      <button class="icon" data-open="w-rated"><svg><use href="#i-scale"/></svg><span>Under/<wbr>overrated</span></button>
-      <button class="icon" data-open="w-fraga"><svg><use href="#i-flag"/></svg><span>Fråga svenskarna</span></button>
+      <button class="icon" data-open="w-projects"><svg><use href="#i-folder"/></svg><span>Projekt</span></button>
       <button class="icon" data-open="w-paint"><svg><use href="#i-paint"/></svg><span>Paint</span></button>
     </nav>
 
@@ -359,8 +383,23 @@
       </div>
     </section>
 
-    <!-- data-progress = hur många av 20 rutor som är ifyllda -->
-    <section class="win project c-blue" id="w-rated" data-title="Under/overrated" data-icon="i-scale" data-x="0.56" data-y="0.05" data-w="420">
+    <!-- Projektmappen: en ikon per projekt, data-open = projektfönstrets id -->
+    <section class="win folder c-blue" id="w-projects" data-title="C:\Projekt" data-icon="i-folder" data-x="0.56" data-y="0.05" data-w="440">
+      <div class="panel">
+        <div class="folder-icons">
+          <button class="icon" data-open="w-rated"><svg><use href="#i-scale"/></svg><span>Under/<wbr>overrated</span></button>
+          <button class="icon" data-open="w-fraga"><svg><use href="#i-flag"/></svg><span>Fråga svenskarna</span></button>
+          <button class="icon" data-open="w-raketer"><svg><use href="#i-rocket"/></svg><span>Sociala raketer</span></button>
+          <button class="icon" data-open="w-sanktan"><svg><use href="#i-star"/></svg><span>Sanktan</span></button>
+          <button class="icon" data-open="w-ursakten"><svg><use href="#i-bubble"/></svg><span>Ursäkten</span></button>
+        </div>
+      </div>
+      <div class="folder-status">5 objekt</div>
+    </section>
+
+    <!-- Projektfönster. Stängda från start (hidden data-closed="1"), öppnas från mappen.
+         data-progress = hur många av 20 rutor som är ifyllda -->
+    <section class="win project c-blue" id="w-rated" data-title="Under/overrated" data-icon="i-scale" data-x="0.14" data-y="0.08" data-w="420" hidden data-closed="1">
       <div class="panel">
         <svg class="big"><use href="#i-scale"/></svg>
         <div>
@@ -377,7 +416,7 @@
       </div>
     </section>
 
-    <section class="win project c-violet" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-flag" data-x="0.62" data-y="0.43" data-w="420">
+    <section class="win project c-violet" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-flag" data-x="0.18" data-y="0.14" data-w="420" hidden data-closed="1">
       <div class="panel">
         <svg class="big"><use href="#i-flag"/></svg>
         <div>
@@ -394,7 +433,52 @@
       </div>
     </section>
 
-    <section class="win paint c-magenta" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.17" data-y="0.44" data-w="500">
+    <section class="win project c-orange" id="w-raketer" data-title="Sociala raketer" data-icon="i-rocket" data-x="0.22" data-y="0.20" data-w="420" hidden data-closed="1">
+      <div class="panel">
+        <svg class="big"><use href="#i-rocket"/></svg>
+        <div>
+          <h2>Sociala raketer</h2>
+          <p>Beskrivning kommer snart.</p>
+          <div class="meta">
+            <span class="tag">Projekt</span>
+            <!-- När projektet är live: <a class="btn" href="https://…">Öppna ↗</a> -->
+            <button class="btn" data-soon>Öppna ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="win project c-blue" id="w-sanktan" data-title="Sanktan" data-icon="i-star" data-x="0.26" data-y="0.26" data-w="420" hidden data-closed="1">
+      <div class="panel">
+        <svg class="big"><use href="#i-star"/></svg>
+        <div>
+          <h2>Sanktan</h2>
+          <p>Beskrivning kommer snart.</p>
+          <div class="meta">
+            <span class="tag">Projekt</span>
+            <!-- När projektet är live: <a class="btn" href="https://…">Öppna ↗</a> -->
+            <button class="btn" data-soon>Öppna ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="win project c-magenta" id="w-ursakten" data-title="Ursäkten" data-icon="i-bubble" data-x="0.30" data-y="0.32" data-w="420" hidden data-closed="1">
+      <div class="panel">
+        <svg class="big"><use href="#i-bubble"/></svg>
+        <div>
+          <h2>Ursäkten</h2>
+          <p>Beskrivning kommer snart.</p>
+          <div class="meta">
+            <span class="tag">Projekt</span>
+            <!-- När projektet är live: <a class="btn" href="https://…">Öppna ↗</a> -->
+            <button class="btn" data-soon>Öppna ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="win paint c-violet" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.17" data-y="0.44" data-w="500">
       <div class="panel">
         <div class="body">
           <div class="toolbox" role="toolbar" aria-label="Verktyg">
@@ -547,8 +631,8 @@
     $$('.icon').forEach(ic => {
       ic.addEventListener('click', e => {
         $$('.icon').forEach(o => o.classList.toggle('selected', o === ic));
-        // Dubbelklick med mus, enkelklick med finger eller tangentbord
-        if (e.detail === 0 || e.detail >= 2 || !matchMedia('(pointer: fine)').matches) openWin(ic.dataset.open);
+        // Skrivbordet: dubbelklick med mus. I mappar, med finger eller tangentbord: enkelklick
+        if (ic.closest('.win') || e.detail === 0 || e.detail >= 2 || !matchMedia('(pointer: fine)').matches) openWin(ic.dataset.open);
       });
     });
     desktop.addEventListener('pointerdown', e => {

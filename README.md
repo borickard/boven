@@ -4,6 +4,7 @@ Personlig startsida som samlar mina projekt. Retro-skrivbord: flyttbara fönster
 
 - `index.html` – hela sidan, en fil, ingen build, inga beroenden.
   Nytt fönster = ny `<section class="win">` (se kommentaren i filen) + en ikon i `<nav class="icons">`.
+  Nytt projekt = nytt projektfönster + en ikon i projektmappen (`#w-projects`).
 
 ## Projekt (subdomäner)
 
@@ -15,3 +16,6 @@ t.ex. CNAME). Den här sidan länkar bara till dem – byt projektets
 | ------------------ | ------------------- |
 | Under/overrated    | `rated.boven.se`    |
 | Fråga svenskarna   | `fraga.boven.se`    |
+| Sociala raketer    | –                   |
+| Sanktan            | –                   |
+| Ursäkten           | –                   |
