@@ -6,7 +6,7 @@
   <title>boven.se</title>
   <meta name="description" content="boven.se – sidoprojekt, prototyper och experiment.">
   <meta name="theme-color" content="#13a3a8">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='1' y='1' width='14' height='14' fill='%23fff6f4' stroke='%233d3346'/><rect x='2.5' y='2.5' width='11' height='3' fill='%23f9c9cc' stroke='%233d3346' stroke-width='.8'/><rect x='2.5' y='7' width='11' height='6.5' fill='%239ee9c8' stroke='%233d3346' stroke-width='.8'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='1' y='1' width='14' height='14' fill='%23f7f6f2' stroke='%232f3a45'/><rect x='2.5' y='2.5' width='11' height='3' fill='%23bfe3dc' stroke='%232f3a45' stroke-width='.8'/><rect x='2.5' y='7' width='11' height='6.5' fill='%239ee9c8' stroke='%232f3a45' stroke-width='.8'/></svg>">
   <link rel="preload" href="fonts/vt323-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
@@ -15,18 +15,19 @@
       font-display: swap;
     }
     :root {
-      --ink:     #3d3346;
-      --paper:   #fff6f4;
-      --blush:   #fde4e3;
-      --pink:    #f9c9cc;
-      --rose:    #f28c9b;
+      --ink:     #2f3a45;
+      --paper:   #f7f6f2;
+      --blush:   #eae8e1;
+      --pink:    #bfe3dc;
+      --rose:    #f08a5d;
       --peach:   #ffd6aa;
       --mint:    #9ee9c8;
       --mint-lt: #d3f6e8;
       --teal:    #19a3a6;
       --teal-dk: #127f86;
       --line: 1.5px solid var(--ink);
-      --grad: linear-gradient(180deg, var(--peach), #f7a3b3);
+      --accent: #ffc58f;
+      --grad: linear-gradient(180deg, var(--peach), #f39a72);
       --font: "VT323", ui-monospace, "Courier New", monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,6 +35,9 @@
     body { background: #13a3a8; color: var(--ink);
       font: 19px/1.25 var(--font);
       overflow-x: hidden;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
     body::before {
       content: ""; position: fixed; inset: 0; z-index: -1;
@@ -49,12 +53,12 @@
     /* ---------- Knappar ---------- */
     .btn {
       display: inline-block; min-width: 84px; padding: 3px 14px;
-      background: var(--mint); color: var(--ink);
+      background: var(--accent); color: var(--ink);
       border: var(--line);
       font-size: 22px; letter-spacing: .04em; text-align: center; text-decoration: none; text-transform: uppercase;
       cursor: pointer;
     }
-    .btn:hover { background: var(--mint-lt); }
+    .btn:hover { background: var(--peach); }
     .btn:active { transform: translateY(1px); }
 
     /* ---------- Skrivbord ---------- */
@@ -89,7 +93,7 @@
     .titlebar {
       display: flex; align-items: center; gap: 6px;
       height: 32px; padding: 0 5px 0 10px; margin-bottom: 7px;
-      background: #fbe3e3;
+      background: #e2e5e1;
       border: var(--line);
       user-select: none;
       touch-action: none;
@@ -114,8 +118,8 @@
 
     /* Om mig */
     .about .panel { display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: start; }
-    .portrait { aspect-ratio: 1; background: var(--grad); border: var(--line); position: relative; display: grid; place-items: center; }
-    .portrait > svg:first-child { width: 58%; height: auto; aspect-ratio: 1; }
+    .portrait { aspect-ratio: 1; overflow: hidden; background: var(--grad); border: var(--line); position: relative; display: grid; place-items: center; }
+    .portrait > svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; }
     .portrait .s { position: absolute; width: 16px; height: 16px; }
     .portrait .s path { fill: #fff; stroke: var(--ink); stroke-width: 1.2; }
     .about h1 { font-size: 34px; line-height: 1; margin-bottom: 8px; font-weight: normal; }
@@ -148,14 +152,14 @@
     .dialog .actions { display: flex; justify-content: center; gap: 12px; padding: 10px 0 3px; }
     html.floating .dialog {
       box-shadow:
-        6px -6px 0 0 #fbd3d3, 6px -6px 0 1.5px var(--ink),
-        12px -12px 0 0 #fcd4ce, 12px -12px 0 1.5px var(--ink),
-        18px -18px 0 0 #fcd5c8, 18px -18px 0 1.5px var(--ink),
-        24px -24px 0 0 #fdd6c3, 24px -24px 0 1.5px var(--ink),
-        30px -30px 0 0 #fdd6be, 30px -30px 0 1.5px var(--ink),
-        36px -36px 0 0 #fed7b9, 36px -36px 0 1.5px var(--ink),
-        42px -42px 0 0 #fed8b3, 42px -42px 0 1.5px var(--ink),
-        48px -48px 0 0 #ffd9ae, 48px -48px 0 1.5px var(--ink);
+        6px -6px 0 0 #e6e3da, 6px -6px 0 1.5px var(--ink),
+        12px -12px 0 0 #eae1d3, 12px -12px 0 1.5px var(--ink),
+        18px -18px 0 0 #eddfcc, 18px -18px 0 1.5px var(--ink),
+        24px -24px 0 0 #f1ddc5, 24px -24px 0 1.5px var(--ink),
+        30px -30px 0 0 #f4dcbf, 30px -30px 0 1.5px var(--ink),
+        36px -36px 0 0 #f8dab8, 36px -36px 0 1.5px var(--ink),
+        42px -42px 0 0 #fbd8b1, 42px -42px 0 1.5px var(--ink),
+        48px -48px 0 0 #ffd6aa, 48px -48px 0 1.5px var(--ink);
     }
 
     /* Paint */
@@ -175,7 +179,7 @@
     .size i { display: block; border-radius: 50%; background: var(--ink); }
     .size.on { background: var(--mint); }
     .canvas-well { flex: 1; min-width: 0; }
-    canvas { display: block; width: 100%; border: var(--line); touch-action: none; cursor: crosshair; background: #f7c0b8; }
+    canvas { display: block; width: 100%; border: var(--line); touch-action: none; cursor: crosshair; background: #f9bf96; }
     .palette-row { display: flex; gap: 14px; align-items: center; margin-top: 10px; }
     .colors { position: relative; width: 50px; height: 44px; flex: none; }
     .colors button { position: absolute; width: 30px; height: 30px; border: var(--line); cursor: pointer; padding: 0; }
@@ -254,73 +258,71 @@
   <!-- Ikoner, används med <use href="#i-…">. Tunna linjer, pastellfyllning. -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <linearGradient id="g-sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6aa"/><stop offset="1" stop-color="#f7a3b3"/></linearGradient>
+      <linearGradient id="g-sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6aa"/><stop offset="1" stop-color="#f39a72"/></linearGradient>
     </defs>
     <symbol id="i-page" viewBox="0 0 32 32">
-      <path d="M7 3h13l6 6v20H7z" fill="#fde4e3" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M20 3v6h6" fill="#f28c9b" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M11 15h11M11 19h11M11 23h7" stroke="#3d3346" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M7 3h13l6 6v20H7z" fill="#eae8e1" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M20 3v6h6" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M11 15h11M11 19h11M11 23h7" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-folder" viewBox="0 0 32 32">
-      <path d="M4 9h9l2-3h8l2 3" fill="#19a3a6" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <rect x="3" y="9" width="26" height="18" fill="#ffd6aa" stroke="#3d3346" stroke-width="1.5"/>
+      <path d="M4 9h9l2-3h8l2 3" fill="#19a3a6" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <rect x="3" y="9" width="26" height="18" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5"/>
     </symbol>
     <symbol id="i-paint" viewBox="0 0 32 32">
-      <rect x="3" y="5" width="26" height="22" fill="#fff6f4" stroke="#3d3346" stroke-width="1.5"/>
-      <rect x="6" y="8" width="20" height="16" fill="url(#g-sunset)" stroke="#3d3346" stroke-width="1.5"/>
-      <path d="M16 11l1.2 3.8L21 16l-3.8 1.2L16 21l-1.2-3.8L11 16l3.8-1.2z" fill="#fff" stroke="#3d3346" stroke-width="1.1" stroke-linejoin="round"/>
+      <rect x="3" y="5" width="26" height="22" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
+      <rect x="6" y="8" width="20" height="16" fill="url(#g-sunset)" stroke="#2f3a45" stroke-width="1.5"/>
+      <path d="M16 11l1.2 3.8L21 16l-3.8 1.2L16 21l-1.2-3.8L11 16l3.8-1.2z" fill="#fff" stroke="#2f3a45" stroke-width="1.1" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-star" viewBox="0 0 32 32">
-      <path d="M16 4l3.6 7.6 8.2 1-6 5.7 1.6 8.2L16 22.5l-7.4 4 1.6-8.2-6-5.7 8.2-1z" fill="#ffd6aa" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16 4l3.6 7.6 8.2 1-6 5.7 1.6 8.2L16 22.5l-7.4 4 1.6-8.2-6-5.7 8.2-1z" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-cloud" viewBox="0 0 32 32">
-      <path d="M9 24h15a5 5 0 000-10 7 7 0 00-13-2 6 6 0 00-2 12z" fill="#fff" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <circle cx="13" cy="18.5" r="1.3" fill="#3d3346"/><circle cx="18" cy="18.5" r="1.3" fill="#3d3346"/><circle cx="23" cy="18.5" r="1.3" fill="#3d3346"/>
+      <path d="M9 24h15a5 5 0 000-10 7 7 0 00-13-2 6 6 0 00-2 12z" fill="#fff" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="13" cy="18.5" r="1.3" fill="#2f3a45"/><circle cx="18" cy="18.5" r="1.3" fill="#2f3a45"/><circle cx="23" cy="18.5" r="1.3" fill="#2f3a45"/>
     </symbol>
     <symbol id="i-rocket" viewBox="0 0 32 32">
-      <path d="M16 3c5 3.5 6.5 9.5 5.5 16h-11C9.5 12.5 11 6.5 16 3z" fill="#fff6f4" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <circle cx="16" cy="12" r="2.8" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.5"/>
-      <path d="M10.5 15l-4 5v3.5l4.5-2.5zM21.5 15l4 5v3.5l-4.5-2.5z" fill="#f28c9b" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M13 19.5l3 7 3-7" fill="#ffd6aa" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="i-halo" viewBox="0 0 32 32">
-      <ellipse cx="16" cy="6" rx="8" ry="2.6" fill="none" stroke="#3d3346" stroke-width="1.5"/>
-      <path d="M16 28S5 21.5 5 15a5.5 5.5 0 0111-2.2A5.5 5.5 0 0127 15c0 6.5-11 13-11 13z" fill="#f9c9cc" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16 3c5 3.5 6.5 9.5 5.5 16h-11C9.5 12.5 11 6.5 16 3z" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <circle cx="16" cy="12" r="2.8" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.5"/>
+      <path d="M10.5 15l-4 5v3.5l4.5-2.5zM21.5 15l4 5v3.5l-4.5-2.5z" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M13 19.5l3 7 3-7" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
     </symbol>
     <symbol id="i-drop" viewBox="0 0 32 32">
-      <path d="M16 3s9 10.5 9 16.5a9 9 0 01-18 0C7 13.5 16 3 16 3z" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16 3s9 10.5 9 16.5a9 9 0 01-18 0C7 13.5 16 3 16 3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
       <path d="M11.5 19.5a4.5 4.5 0 003 4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-ball" viewBox="0 0 32 32">
-      <circle cx="16" cy="16" r="12" fill="#fff" stroke="#3d3346" stroke-width="1.5"/>
-      <path d="M16 10.5l5 3.6-1.9 5.9h-6.2L11 14.1z" fill="#3d3346"/>
-      <path d="M16 10.5V4.5M21 14.1l5.8-1.8M19.1 20l3.6 5M12.9 20l-3.6 5M11 14.1l-5.8-1.8" stroke="#3d3346" stroke-width="1.5"/>
+      <circle cx="16" cy="16" r="12" fill="#fff" stroke="#2f3a45" stroke-width="1.5"/>
+      <path d="M16 10.5l5 3.6-1.9 5.9h-6.2L11 14.1z" fill="#2f3a45"/>
+      <path d="M16 10.5V4.5M21 14.1l5.8-1.8M19.1 20l3.6 5M12.9 20l-3.6 5M11 14.1l-5.8-1.8" stroke="#2f3a45" stroke-width="1.5"/>
     </symbol>
     <symbol id="i-chart" viewBox="0 0 32 32">
-      <rect x="4" y="5" width="24" height="22" fill="#fff6f4" stroke="#3d3346" stroke-width="1.5"/>
-      <rect x="8" y="17" width="4" height="7" fill="#f28c9b" stroke="#3d3346" stroke-width="1.3"/>
-      <rect x="14" y="12" width="4" height="12" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.3"/>
-      <rect x="20" y="9" width="4" height="15" fill="#ffd6aa" stroke="#3d3346" stroke-width="1.3"/>
+      <rect x="4" y="5" width="24" height="22" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
+      <rect x="8" y="17" width="4" height="7" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.3"/>
+      <rect x="14" y="12" width="4" height="12" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.3"/>
+      <rect x="20" y="9" width="4" height="15" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.3"/>
     </symbol>
     <symbol id="i-phone" viewBox="0 0 32 32">
-      <rect x="9" y="3" width="14" height="26" rx="2.5" fill="#fff6f4" stroke="#3d3346" stroke-width="1.5"/>
-      <path d="M12 9h8a1.5 1.5 0 011.5 1.5v5A1.5 1.5 0 0120 17h-4.5l-3 2.5V17H12a1.5 1.5 0 01-1.5-1.5v-5A1.5 1.5 0 0112 9z" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.3" stroke-linejoin="round"/>
-      <path d="M14 25h4" stroke="#3d3346" stroke-width="1.5" stroke-linecap="round"/>
+      <rect x="9" y="3" width="14" height="26" rx="2.5" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
+      <path d="M12 9h8a1.5 1.5 0 011.5 1.5v5A1.5 1.5 0 0120 17h-4.5l-3 2.5V17H12a1.5 1.5 0 01-1.5-1.5v-5A1.5 1.5 0 0112 9z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M14 25h4" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
     </symbol>
-    <symbol id="i-heart" viewBox="0 0 32 32">
-      <path d="M16 27S4 20 4 12.5a6 6 0 0112-2.4 6 6 0 0112 2.4C28 20 16 27 16 27z" fill="#f28c9b" stroke="#3d3346" stroke-width="1.5" stroke-linejoin="round"/>
+    <symbol id="i-sun" viewBox="0 0 32 32">
+      <path d="M5 21a11 11 0 0122 0z" fill="#ffc58f" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M7.5 15h17M6 18h20" stroke="#2f3a45" stroke-width="1.2"/>
+      <path d="M3 21h26M3 25h26M16 21v7M10 21l-4 7M22 21l4 7" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-spark" viewBox="0 0 20 20">
       <path d="M10 1l2 7 7 2-7 2-2 7-2-7-7-2 7-2z" stroke-linejoin="round"/>
     </symbol>
-    <symbol id="c-min" viewBox="0 0 12 12"><path d="M2 9.5h8" stroke="#3d3346" stroke-width="1.5"/></symbol>
-    <symbol id="c-close" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#3d3346" stroke-width="1.5"/></symbol>
-    <symbol id="t-pencil" viewBox="0 0 20 20"><path d="M13.5 2.5l4 4L7 17H3v-4z" fill="#ffd6aa" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 4.5l4 4" stroke="#3d3346" stroke-width="1.4"/></symbol>
-    <symbol id="t-brush" viewBox="0 0 20 20"><path d="M17.5 2.5L10 10" stroke="#3d3346" stroke-width="1.6" stroke-linecap="round"/><path d="M9 10.5c-2.3 0-4 1.7-4 4 0 1-1 2.2-2.2 2.7 3.4 1.2 7.8 0 8.4-4z" fill="#f28c9b" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-eraser" viewBox="0 0 20 20"><path d="M11.5 3l5.5 5.5-7.5 7.5H5l-2.5-2.5z" fill="#fff" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 3l5.5 5.5-4.5 4.5L7 7.5z" fill="#f9c9cc" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-fill" viewBox="0 0 20 20"><path d="M8 3l7.5 7.5-5.5 5.5L3 9z" fill="#fff" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/><path d="M3.5 9.5h11" stroke="#3d3346" stroke-width="1.4"/><path d="M17 12.5s1.7 2.2 1.7 3.3a1.7 1.7 0 01-3.4 0c0-1.1 1.7-3.3 1.7-3.3z" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.2"/></symbol>
-    <symbol id="t-clear" viewBox="0 0 20 20"><path d="M4.5 6h11l-1 11h-9z" fill="#fde4e3" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/><path d="M3 6h14M8 6V3.5h4V6" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-save" viewBox="0 0 20 20"><path d="M3 3h11l3 3v11H3z" fill="#9ee9c8" stroke="#3d3346" stroke-width="1.4" stroke-linejoin="round"/><rect x="6" y="3" width="7" height="4.5" fill="#fff" stroke="#3d3346" stroke-width="1.2"/><rect x="5.5" y="11" width="9" height="6" fill="#fff6f4" stroke="#3d3346" stroke-width="1.2"/></symbol>
+    <symbol id="c-min" viewBox="0 0 12 12"><path d="M2 9.5h8" stroke="#2f3a45" stroke-width="1.5"/></symbol>
+    <symbol id="c-close" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#2f3a45" stroke-width="1.5"/></symbol>
+    <symbol id="t-pencil" viewBox="0 0 20 20"><path d="M13.5 2.5l4 4L7 17H3v-4z" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 4.5l4 4" stroke="#2f3a45" stroke-width="1.4"/></symbol>
+    <symbol id="t-brush" viewBox="0 0 20 20"><path d="M17.5 2.5L10 10" stroke="#2f3a45" stroke-width="1.6" stroke-linecap="round"/><path d="M9 10.5c-2.3 0-4 1.7-4 4 0 1-1 2.2-2.2 2.7 3.4 1.2 7.8 0 8.4-4z" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="t-eraser" viewBox="0 0 20 20"><path d="M11.5 3l5.5 5.5-7.5 7.5H5l-2.5-2.5z" fill="#fff" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 3l5.5 5.5-4.5 4.5L7 7.5z" fill="#bfe3dc" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="t-fill" viewBox="0 0 20 20"><path d="M8 3l7.5 7.5-5.5 5.5L3 9z" fill="#fff" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M3.5 9.5h11" stroke="#2f3a45" stroke-width="1.4"/><path d="M17 12.5s1.7 2.2 1.7 3.3a1.7 1.7 0 01-3.4 0c0-1.1 1.7-3.3 1.7-3.3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.2"/></symbol>
+    <symbol id="t-clear" viewBox="0 0 20 20"><path d="M4.5 6h11l-1 11h-9z" fill="#eae8e1" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M3 6h14M8 6V3.5h4V6" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="t-save" viewBox="0 0 20 20"><path d="M3 3h11l3 3v11H3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><rect x="6" y="3" width="7" height="4.5" fill="#fff" stroke="#2f3a45" stroke-width="1.2"/><rect x="5.5" y="11" width="9" height="6" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.2"/></symbol>
   </svg>
 
   <svg class="sparkle" style="left:58%;top:8%"><use href="#i-spark"/></svg>
@@ -341,69 +343,45 @@
       hidden data-closed="1" = stängt från start.
     -->
 
-    <section class="win about" id="w-about" data-title="om_mig.txt" data-icon="i-page" data-x="0.10" data-y="0.05" data-w="500">
+    <section class="win about" id="w-about" data-title="om_mig.txt" data-icon="i-page" data-x="0.09" data-y="0.04" data-w="500">
       <div class="panel">
         <div class="portrait" aria-hidden="true">
-          <svg><use href="#i-heart"/></svg>
-          <svg class="s" style="left:12%;top:12%"><use href="#i-spark"/></svg>
-          <svg class="s" style="right:10%;top:30%;width:12px;height:12px"><use href="#i-spark"/></svg>
-          <svg class="s" style="left:22%;bottom:10%;width:11px;height:11px"><use href="#i-spark"/></svg>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs><clipPath id="sun-cut"><path d="M24 58a26 26 0 0152 0z"/></clipPath></defs>
+            <path d="M24 58a26 26 0 0152 0z" fill="#ffe2b8"/>
+            <path d="M20 44h60M20 50h60M20 55h60" stroke="#f39a72" stroke-width="2.4" clip-path="url(#sun-cut)"/>
+            <path d="M24 58a26 26 0 0152 0" fill="none" stroke="#2f3a45" stroke-width="1.6"/>
+            <rect x="0" y="58" width="100" height="42" fill="#19a3a6"/>
+            <path d="M0 58h100M0 64h100M0 72h100M0 83h100M50 58v42M38 58l-18 42M62 58l18 42M26 58L-8 100M74 58l34 42" stroke="#9ee9c8" stroke-width="1.2" fill="none"/>
+            <path d="M0 58h100" stroke="#2f3a45" stroke-width="1.6"/>
+          </svg>
+          <svg class="s" style="left:12%;top:10%"><use href="#i-spark"/></svg>
+          <svg class="s" style="right:12%;top:22%;width:11px;height:11px"><use href="#i-spark"/></svg>
         </div>
         <div>
-          <h1>Hej och välkommen!</h1>
-          <p>Det här är min lilla hörna av webben. Här samlar jag saker jag bygger – små sajter, prototyper och idéer som jag vill testa på riktigt.</p>
-          <p>Dra runt fönstren, kika i projektmappen och rita gärna något i Paint.</p>
-          <p class="sig">✦ boven.se</p>
+          <h1>Om boven.se</h1>
+          <p>Här samlar jag mina digitala projekt – från lanserade tjänster till prototyper och experiment.</p>
+          <p>De flesta utgår från ett konkret behov: att hitta det mest engagerande innehållet på TikTok, att fördela speltid rättvist i en fotbollsmatch eller att kunna lämna en social situation utan att behöva förklara sig.</p>
+          <p>Alla projekt finns i mappen C:\Projekt.</p>
         </div>
       </div>
     </section>
 
-    <!-- Projektmappen: en ikon per projekt, data-open = projektfönstrets id -->
-    <section class="win folder" id="w-projects" data-title="C:\Projekt" data-icon="i-folder" data-x="0.58" data-y="0.14" data-w="440">
+    <section class="win project" id="w-rated" data-title="Under/overrated" data-icon="i-star" data-x="0.45" data-y="0.03" data-w="390">
       <div class="panel">
-        <div class="folder-icons">
-          <button class="icon" data-open="w-raketer"><svg><use href="#i-rocket"/></svg><span>Sociala raketer</span></button>
-          <button class="icon" data-open="w-sanktan"><svg><use href="#i-ball"/></svg><span>Sanktan</span></button>
-          <button class="icon" data-open="w-ursakten"><svg><use href="#i-phone"/></svg><span>Ursäkten</span></button>
-          <button class="icon" data-open="w-fraga"><svg><use href="#i-chart"/></svg><span>Fråga svenskarna</span></button>
-          <button class="icon" data-open="w-rated"><svg><use href="#i-star"/></svg><span>Under/<wbr>overrated</span></button>
-        </div>
-      </div>
-      <div class="folder-status">5 objekt</div>
-    </section>
-
-    <!-- Projektfönster. Stängda från start, öppnas från mappen.
-         Pågående projekt kan ha <div class="player" data-progress="0–100">.
-         Projekt som inte är live har en knapp med data-soon som visar "Inte klart än". -->
-    <section class="win project" id="w-raketer" data-title="Sociala raketer" data-icon="i-rocket" data-x="0.14" data-y="0.06" data-w="460" hidden data-closed="1">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-rocket"/></svg></div>
+        <div class="cell"><svg><use href="#i-star"/></svg></div>
         <div>
-          <h2>Sociala raketer</h2>
-          <p>Mitt mest ambitiösa projekt. Här lyfter jag fram det mest engagerande innehållet från svenska varumärken och organisationer som är aktiva på TikTok.</p>
+          <h2>Under/overrated</h2>
+          <p>En plattform där vi tillsammans listar ut vad som är mest överskattat och mest underskattat. Vad som helst kan läggas till.</p>
           <div class="meta">
             <span class="tag live">Live</span>
-            <a class="btn" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Öppna ↗</a>
+            <a class="btn" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="win project" id="w-sanktan" data-title="Sanktan" data-icon="i-ball" data-x="0.18" data-y="0.12" data-w="460" hidden data-closed="1">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-ball"/></svg></div>
-        <div>
-          <h2>Sanktan</h2>
-          <p>Planera fotbollsmatchen. Fördela speltiden jämnt mellan olika positioner, håll koll på resultatet, välj formation och se när det är dags att byta spelare.</p>
-          <div class="meta">
-            <span class="tag live">Live</span>
-            <a class="btn" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="win project" id="w-ursakten" data-title="Ursäkten" data-icon="i-phone" data-x="0.22" data-y="0.18" data-w="460" hidden data-closed="1">
+    <section class="win project" id="w-ursakten" data-title="Ursäkten" data-icon="i-phone" data-x="0.74" data-y="0.03" data-w="390">
       <div class="panel">
         <div class="cell"><svg><use href="#i-phone"/></svg></div>
         <div>
@@ -418,7 +396,54 @@
       </div>
     </section>
 
-    <section class="win project" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-chart" data-x="0.26" data-y="0.24" data-w="460" hidden data-closed="1">
+    <section class="win project" id="w-raketer" data-title="Sociala raketer" data-icon="i-rocket" data-x="0.52" data-y="0.48" data-w="470">
+      <div class="panel">
+        <div class="cell"><svg><use href="#i-rocket"/></svg></div>
+        <div>
+          <h2>Sociala raketer</h2>
+          <p>Mitt mest ambitiösa projekt. Här lyfter jag fram det mest engagerande innehållet från svenska varumärken och organisationer som är aktiva på TikTok.</p>
+          <div class="meta">
+            <span class="tag live">Live</span>
+            <a class="btn" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Öppna ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projektmappen: en ikon per projekt, data-open = projektfönstrets id -->
+    <section class="win folder" id="w-projects" data-title="C:\Projekt" data-icon="i-folder" data-x="0.09" data-y="0.50" data-w="440">
+      <div class="panel">
+        <div class="folder-icons">
+          <button class="icon" data-open="w-raketer"><svg><use href="#i-rocket"/></svg><span>Sociala raketer</span></button>
+          <button class="icon" data-open="w-sanktan"><svg><use href="#i-ball"/></svg><span>Sanktan</span></button>
+          <button class="icon" data-open="w-ursakten"><svg><use href="#i-phone"/></svg><span>Ursäkten</span></button>
+          <button class="icon" data-open="w-rated"><svg><use href="#i-star"/></svg><span>Under/<wbr>overrated</span></button>
+          <button class="icon" data-open="w-fraga"><svg><use href="#i-chart"/></svg><span>Fråga svenskarna</span></button>
+        </div>
+      </div>
+      <div class="folder-status">5 objekt</div>
+    </section>
+
+    <!-- Fler projektfönster. Stängda från start, öppnas från mappen.
+         Pågående projekt kan ha <div class="player" data-progress="0–100">.
+         Projekt som inte är live har en knapp med data-soon som visar "Inte klart än". -->
+
+    <section class="win project" id="w-sanktan" data-title="Sanktan" data-icon="i-ball" data-x="0.20" data-y="0.10" data-w="460" hidden data-closed="1">
+      <div class="panel">
+        <div class="cell"><svg><use href="#i-ball"/></svg></div>
+        <div>
+          <h2>Sanktan</h2>
+          <p>Planera fotbollsmatchen. Fördela speltiden jämnt mellan olika positioner, håll koll på resultatet, välj formation och se när det är dags att byta spelare.</p>
+          <div class="meta">
+            <span class="tag live">Live</span>
+            <a class="btn" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="win project" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-chart" data-x="0.24" data-y="0.18" data-w="460" hidden data-closed="1">
       <div class="panel">
         <div class="cell"><svg><use href="#i-chart"/></svg></div>
         <div>
@@ -434,23 +459,8 @@
       </div>
     </section>
 
-    <section class="win project" id="w-rated" data-title="Under/overrated" data-icon="i-star" data-x="0.30" data-y="0.30" data-w="460" hidden data-closed="1">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-star"/></svg></div>
-        <div>
-          <h2>Under/overrated</h2>
-          <p>Är det underskattat eller överskattat? Tyck till om allt möjligt.</p>
-          <div class="player" data-progress="30"></div>
-          <div class="meta">
-            <span class="tag">Kommer snart</span>
-            <!-- När projektet är live: <a class="btn" href="https://…" target="_blank" rel="noopener">Öppna ↗</a> -->
-            <button class="btn" data-soon>Öppna ↗</button>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="win paint" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.16" data-y="0.40" data-w="520">
+    <section class="win paint" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.30" data-y="0.20" data-w="520" hidden data-closed="1">
       <div class="panel">
         <div class="body">
           <div class="toolbox" id="toolbox" role="toolbar" aria-label="Verktyg">
@@ -473,13 +483,6 @@
       </div>
     </section>
 
-    <section class="win dialog" id="w-hello" data-title="boven.se" data-icon="i-heart" data-x="0.60" data-y="0.60" data-w="300" hidden data-closed="1">
-      <div class="panel">
-        <h2>Välkommen<br>till boven.se</h2>
-        <div class="actions"><button class="btn" data-dismiss>OK</button></div>
-      </div>
-    </section>
-
     <section class="win dialog" id="w-error" data-title="Fel" data-icon="i-drop" data-x="0.36" data-y="0.36" data-w="340" hidden data-closed="1">
       <div class="panel">
         <h2>Inte klart än</h2>
@@ -497,7 +500,7 @@
   </div>
 
   <footer class="taskbar">
-    <button class="start" id="start" aria-expanded="false" aria-controls="startmenu"><svg><use href="#i-spark" style="fill:#fff;stroke:#3d3346;stroke-width:1.3"/></svg>Start</button>
+    <button class="start" id="start" aria-expanded="false" aria-controls="startmenu"><svg><use href="#i-spark" style="fill:#fff;stroke:#2f3a45;stroke-width:1.3"/></svg>Start</button>
     <div class="tasks" id="tasks"></div>
     <div class="tray" id="clock">--:--</div>
   </footer>
@@ -644,16 +647,16 @@
 
     /* ---------- Paint ---------- */
     const cv = $('#canvas'), ctx = cv.getContext('2d', { willReadFrequently: true });
-    const colors = ['#127f86','#4fa9a5','#2cc4b8','#6fdcc0','#9ee9c8','#d3f6e8','#3d3346','#c9b8f0',
-                    '#f28c9b','#f5a7ad','#f9c9cc','#fde4e3','#ffd6aa','#ffe9a8','#ffffff','#8a7f99'];
-    const stamps = ['i-heart', 'i-star', 'i-cloud', 'i-drop', 'i-halo', 'i-rocket'];
+    const colors = ['#127f86','#4fa9a5','#2cc4b8','#6fdcc0','#9ee9c8','#d3f6e8','#2f3a45','#7fa7d9',
+                    '#f08a5d','#f5b38a','#ffd6aa','#ffe9a8','#eae8e1','#c9ced6','#ffffff','#6b7785'];
+    const stamps = ['i-star', 'i-sun', 'i-cloud', 'i-drop', 'i-ball', 'i-rocket'];
     const stampSize = { 2: 32, 5: 52, 10: 84 };
-    let color = '#3d3346', prev = '#f28c9b', tool = 'pencil', size = 2, last = null;
+    let color = '#2f3a45', prev = '#19a3a6', tool = 'pencil', size = 2, last = null;
     const status = $('#paint-status');
 
     // Bakgrund: solnedgångsgradient som i resten av sajten
     const bg = ctx.createLinearGradient(0, 0, 0, cv.height);
-    bg.addColorStop(0, '#ffd6aa'); bg.addColorStop(1, '#f7a3b3');
+    bg.addColorStop(0, '#ffd6aa'); bg.addColorStop(1, '#f39a72');
     const clear = () => { ctx.fillStyle = bg; ctx.fillRect(0, 0, cv.width, cv.height); };
     clear();
 
@@ -772,8 +775,7 @@
     layout();
     wide.addEventListener('change', layout);
     addEventListener('resize', () => wins.forEach(place));
-    focusWin($('#w-about'));
-    if (wide.matches) openWin('w-hello');
+    focusWin($('#w-raketer'));
   })();
   </script>
 </body>

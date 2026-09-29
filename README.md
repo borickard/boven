@@ -19,4 +19,4 @@ t.ex. CNAME). Den här sidan länkar bara till dem – byt projektets
 | Sanktan            | https://sanktan.vercel.app/     |
 | Ursäkten           | https://ursakter.vercel.app/    |
 | Fråga svenskarna   | pågår                           |
-| Under/overrated    | kommer snart                    |
+| Under/overrated    | https://overunderrated.vercel.app/ |
