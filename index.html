@@ -5,274 +5,678 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>boven.se</title>
   <meta name="description" content="boven.se – sidoprojekt, prototyper och experiment.">
-  <meta name="theme-color" content="#0033cc">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230033cc'/><rect x='4' y='4' width='8' height='8' fill='%23fff'/></svg>">
+  <meta name="theme-color" content="#13a0a6">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='1' y='1' width='14' height='14' rx='2' fill='%23e4d4ff' stroke='%23161616' stroke-width='2'/><rect x='1' y='1' width='14' height='5' fill='%235a3cff' stroke='%23161616' stroke-width='2'/></svg>">
   <style>
     :root {
-      --navy:  #0a1a7a;
-      --blue:  #0033cc;
-      --cobalt:#2a5cff;
-      --sky:   #8fb8ff;
-      --pale:  #dde7ff;
-      --paper: #ececea;
-      --white: #ffffff;
-      --ink:   #0a0f33;
-      --edge:  3px solid var(--ink);
-      --shadow: 6px 6px 0 var(--ink);
+      --teal:     #13a0a6;
+      --grid:     rgba(255, 255, 255, 0.45);
+      --ink:      #161616;
+      --lav:      #e4d4ff;
+      --lav-mid:  #c9a9f5;
+      --lav-dark: #a57de6;
+      --white:    #ffffff;
+      --blue:     #5a3cff;
+      --violet:   #8a2cf0;
+      --magenta:  #ff17d8;
+      --orange:   #ff9c0f;
+      --line: 3px solid var(--ink);
       --mono: "Courier New", Courier, ui-monospace, monospace;
-      --sans: Verdana, Geneva, Tahoma, sans-serif;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
     body {
-      background: var(--paper);
-      background-image: radial-gradient(#c9c9c4 1px, transparent 1px);
-      background-size: 16px 16px;
+      background-color: var(--teal);
+      background-image:
+        linear-gradient(var(--grid) 2px, transparent 2px),
+        linear-gradient(90deg, var(--grid) 2px, transparent 2px);
+      background-size: 96px 96px;
       color: var(--ink);
-      font: 15px/1.6 var(--sans);
+      font: 15px/1.5 var(--mono);
+      overflow-x: hidden;
     }
+    button { font: inherit; color: inherit; }
     a { color: var(--blue); }
-    a:hover { background: var(--blue); color: var(--white); }
 
-    .wrap { max-width: 960px; margin: 0 auto; padding: 0 16px; }
-
-    /* Toppremsa */
-    .strip {
-      background: var(--navy);
-      color: var(--sky);
-      font: 13px/1 var(--mono);
-      padding: 10px 0;
-      letter-spacing: 0.05em;
-    }
-    .strip .wrap { display: flex; justify-content: space-between; gap: 1rem; }
-    .blink { animation: blink 1.1s steps(1) infinite; }
-    @keyframes blink { 50% { opacity: 0; } }
-
-    /* Blockrutnät */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 16px;
-      margin: 32px auto;
-    }
-    .block {
-      border: var(--edge);
-      box-shadow: var(--shadow);
-      padding: 24px;
-    }
-
-    /* Hero */
-    .hero {
-      grid-column: span 4;
-      background: var(--blue);
-      color: var(--white);
-      padding: 40px 28px 28px;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-    .hero h1 {
-      font: 900 clamp(3.5rem, 13vw, 8rem)/0.85 var(--sans);
-      letter-spacing: -0.06em;
-      text-transform: lowercase;
-    }
-    .hero h1 span { color: var(--sky); }
-    .hero p { font: 15px/1.4 var(--mono); margin-top: 16px; color: var(--pale); }
-
-    .tiles {
-      grid-column: span 2;
-      display: grid;
-      grid-template: 1fr 1fr / 1fr 1fr;
-      gap: 16px;
-    }
-    .tiles div { border: var(--edge); box-shadow: var(--shadow); min-height: 80px; }
-    .tiles div:nth-child(1) { background: var(--navy); }
-    .tiles div:nth-child(2) { background: var(--sky); }
-    .tiles div:nth-child(3) { background: var(--white); }
-    .tiles div:nth-child(4) { background: var(--cobalt); }
-
-    /* Fönster */
-    .window { background: var(--white); padding: 0; }
-    .titlebar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--navy);
-      color: var(--white);
-      font: bold 13px/1 var(--mono);
-      padding: 8px 10px;
-      border-bottom: var(--edge);
-    }
-    .titlebar i {
+    /* ---------- Knappar ---------- */
+    .btn {
       display: inline-block;
-      width: 12px; height: 12px;
-      margin-left: 4px;
-      background: var(--paper);
-      border: 2px solid var(--ink);
+      min-width: 100px; padding: 6px 16px;
+      background: var(--lav); color: var(--ink);
+      border: var(--line); border-radius: 7px;
+      box-shadow: 4px 4px 0 var(--ink);
+      font-weight: bold; text-align: center; text-decoration: none;
+      cursor: pointer;
     }
-    .window .body { padding: 20px 24px 24px; }
-    .window h2, .section-title {
-      font: bold 13px/1 var(--mono);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--blue);
-      margin-bottom: 12px;
-    }
-    .window p + p { margin-top: 0.8em; }
+    .btn:hover { background: var(--white); }
+    .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
 
-    .about { grid-column: span 4; }
-    .quote {
-      grid-column: span 2;
-      background: var(--sky);
-      font: bold 22px/1.25 var(--sans);
-      display: flex;
-      align-items: flex-end;
+    /* ---------- Skrivbord ---------- */
+    .desktop { position: relative; min-height: 100%; padding: 16px 16px 72px; }
+
+    .wallpaper {
+      position: fixed; right: 28px; bottom: 76px;
+      font: 900 clamp(3rem, 11vw, 9rem)/0.8 Verdana, sans-serif;
+      letter-spacing: -0.06em;
+      color: var(--white);
+      opacity: 0.18;
+      pointer-events: none;
+      user-select: none;
     }
+
+    .icons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .icon {
+      width: 92px; padding: 6px 2px;
+      background: none; border: 0; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      text-align: center; font-size: 12px; font-weight: bold; line-height: 1.2;
+    }
+    .icon svg { width: 44px; height: 44px; filter: drop-shadow(3px 3px 0 var(--ink)); }
+    .icon span { padding: 2px 5px; background: var(--lav); border: 2px solid var(--ink); border-radius: 4px; }
+    .icon:focus-visible { outline: none; }
+    .icon:focus-visible span, .icon.selected span { background: var(--magenta); color: var(--white); }
+
+    /* ---------- Fönster ---------- */
+    .win {
+      --c: var(--blue);
+      background: var(--c);
+      border: var(--line);
+      border-radius: 8px;
+      box-shadow: 9px 9px 0 var(--ink);
+      padding: 0 6px 6px;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+    .win[hidden] { display: none; }
+    .win.c-orange  { --c: var(--orange); }
+    .win.c-magenta { --c: var(--magenta); }
+    .win.c-violet  { --c: var(--violet); }
+    .win.c-blue    { --c: var(--blue); }
+
+    .titlebar {
+      display: flex; align-items: center; gap: 8px;
+      height: 42px; padding: 0 0 0 4px;
+      color: var(--ink);
+      font-weight: bold;
+      user-select: none;
+      touch-action: none;
+    }
+    html.floating .titlebar { cursor: grab; }
+    html.floating .titlebar:active { cursor: grabbing; }
+    .titlebar .t {
+      flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+      font-size: 14px;
+    }
+    .titlebar .t b { background: var(--lav); border: 2px solid var(--ink); border-radius: 4px; padding: 1px 7px; }
+    .win:not(.active) .titlebar .t b { background: var(--lav-mid); }
+    .ctrl {
+      width: 28px; height: 28px; flex: none;
+      display: grid; place-items: center;
+      background: var(--lav);
+      border: var(--line); border-radius: 5px;
+      cursor: pointer;
+    }
+    .ctrl svg { width: 14px; height: 14px; }
+    .ctrl.min { background: var(--blue); color: var(--lav); }
+    .win.c-blue .ctrl.min, .win.c-violet .ctrl.min { background: var(--magenta); }
+    .ctrl:hover { background: var(--white); color: var(--ink); }
+
+    .panel {
+      background: var(--lav);
+      border: var(--line);
+      border-radius: 3px;
+      padding: 18px 20px;
+    }
+    .panel p + p { margin-top: 0.75em; }
+
+    /* Om mig */
+    .about .panel { display: grid; grid-template-columns: 110px 1fr; }
+    .about .side { background: var(--lav-mid); margin: -18px 18px -18px -20px; border-right: var(--line); padding: 14px 10px; }
+    .about .side svg { width: 64px; height: 64px; display: block; margin: 0 auto 10px; }
+    .about .side small { display: block; text-align: center; font-weight: bold; font-size: 12px; }
+    .about .text { min-height: 190px; }
+    .about .text p:first-child { font-weight: bold; font-size: 17px; }
 
     /* Projekt */
-    .section-title {
-      grid-column: 1 / -1;
-      background: var(--ink);
-      color: var(--white);
-      padding: 12px 16px;
-      margin: 16px 0 0;
-      font-size: 15px;
+    .project .panel { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
+    .project .big { width: 64px; height: 64px; filter: drop-shadow(3px 3px 0 var(--ink)); }
+    .project h2 { font: 900 24px/1.1 Verdana, sans-serif; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .progress {
+      margin: 14px 0 4px;
+      background: var(--white); border: var(--line); border-radius: 6px;
+      padding: 4px; display: grid; grid-template-columns: repeat(20, 1fr); gap: 3px;
+      height: 28px;
     }
-    .project {
-      grid-column: span 3;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 200px;
-      color: var(--white);
-      text-decoration: none;
-      transition: transform 0.08s, box-shadow 0.08s;
-    }
-    .project h3 { font: 900 28px/1.05 var(--sans); letter-spacing: -0.03em; }
-    .project p { flex: 1; }
-    .project.navy   { background: var(--navy); }
-    .project.cobalt { background: var(--cobalt); }
-    .project.pale   { background: var(--pale); color: var(--ink); }
-    .project.white  { background: var(--white); color: var(--ink); }
-    a.project:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--ink); }
+    .progress i { background: var(--lav); border-radius: 2px; }
+    .progress i.on { background: var(--magenta); }
+    .progress-label { font-size: 12px; font-weight: bold; }
+    .project .meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
     .tag {
-      align-self: flex-start;
-      font: bold 12px/1 var(--mono);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 6px 8px;
-      background: var(--white);
-      color: var(--blue);
-      border: 2px solid var(--ink);
-    }
-    .project.white .tag, .project.pale .tag { background: var(--blue); color: var(--white); }
-    .project.ghost {
-      grid-column: 1 / -1;
-      min-height: 90px;
-      background: transparent;
-      box-shadow: none;
-      border-style: dashed;
-      color: var(--blue);
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font: bold 15px/1.4 var(--mono);
+      font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 4px 8px; background: var(--white); border: 2px solid var(--ink); border-radius: 4px;
     }
 
-    /* Sidfot */
-    footer {
-      background: var(--navy);
-      color: var(--sky);
-      font: 13px/1.5 var(--mono);
-      padding: 24px 0;
-      margin-top: 48px;
-      border-top: var(--edge);
+    /* Felruta */
+    .error .panel { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+    .error .bang {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--magenta); border: var(--line);
+      display: grid; place-items: center;
+      color: var(--white); font: 900 38px/1 Verdana, sans-serif;
     }
-    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
-    .badges { display: flex; gap: 8px; flex-wrap: wrap; }
-    .badge {
-      display: inline-flex;
-      width: 88px; height: 31px;
-      border: 2px solid var(--white);
-      font: bold 10px/1 var(--mono);
-      text-transform: uppercase;
-    }
-    .badge b { background: var(--white); color: var(--navy); padding: 0 5px; display: grid; place-items: center; }
-    .badge span { flex: 1; display: grid; place-items: center; color: var(--white); background: var(--blue); }
+    .error h2 { font: bold 26px/1 var(--mono); letter-spacing: 0.04em; margin-bottom: 6px; }
+    .error .actions { grid-column: 1 / -1; display: flex; justify-content: center; gap: 18px; }
 
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-      .hero, .about, .quote, .project, .tiles { grid-column: 1 / -1; }
-      .tiles { grid-template: 60px / repeat(4, 1fr); }
-      .tiles div { min-height: 0; }
-      .hero { min-height: 220px; }
-      .project { min-height: 0; }
+    /* Paint */
+    .paint .panel { padding: 10px; }
+    .paint .body { display: flex; gap: 10px; }
+    .toolbox {
+      display: grid; grid-template-columns: repeat(2, 32px); grid-auto-rows: 32px; gap: 5px;
+      align-content: start;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .blink { animation: none; }
-      .project { transition: none; }
+    .tool {
+      display: grid; place-items: center;
+      background: var(--white); border: 2px solid var(--ink); border-radius: 5px;
+      box-shadow: 2px 2px 0 var(--ink);
+      cursor: pointer;
     }
+    .tool svg { width: 18px; height: 18px; }
+    .tool.on { background: var(--magenta); transform: translate(2px, 2px); box-shadow: none; }
+    .tool:active { transform: translate(2px, 2px); box-shadow: none; }
+    .sizes {
+      grid-column: span 2; display: grid; gap: 4px; margin-top: 4px;
+      background: var(--white); border: 2px solid var(--ink); border-radius: 5px; padding: 5px;
+    }
+    .size { height: 18px; border: 0; border-radius: 3px; background: none; cursor: pointer; display: grid; place-items: center; }
+    .size i { display: block; width: 40px; background: var(--ink); border-radius: 4px; }
+    .size.on { background: var(--blue); }
+    .size.on i { background: var(--white); }
+    .canvas-well { flex: 1; min-width: 0; }
+    canvas {
+      display: block; background: #fff; width: 100%;
+      border: var(--line); border-radius: 3px;
+      touch-action: none; cursor: crosshair;
+    }
+    .palette-row { display: flex; gap: 10px; align-items: center; margin-top: 10px; }
+    .current { width: 40px; height: 40px; flex: none; border: var(--line); border-radius: 5px; background: var(--white); padding: 5px; }
+    .current i { display: block; width: 100%; height: 100%; border: 2px solid var(--ink); border-radius: 2px; }
+    .palette { display: grid; grid-template-columns: repeat(14, 18px); grid-auto-rows: 18px; gap: 3px; }
+    .swatch { border: 2px solid var(--ink); border-radius: 3px; cursor: pointer; padding: 0; }
+    .swatch:hover { transform: scale(1.15); }
+    .statusbar { margin-top: 8px; font-size: 12px; font-weight: bold; color: var(--ink); }
+
+    /* ---------- Aktivitetsfält ---------- */
+    .taskbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10000;
+      height: 56px; padding: 8px 10px;
+      display: flex; gap: 10px; align-items: stretch;
+      background: var(--lav);
+      border-top: var(--line);
+    }
+    .start, .task, .tray {
+      display: flex; align-items: center; gap: 7px; padding: 0 12px;
+      border: var(--line); border-radius: 7px;
+      font-weight: bold;
+    }
+    .start { background: var(--magenta); color: var(--white); box-shadow: 3px 3px 0 var(--ink); cursor: pointer; }
+    .start.on { transform: translate(3px, 3px); box-shadow: none; }
+    .start svg { width: 20px; height: 20px; }
+    .tasks { flex: 1; display: flex; gap: 8px; overflow: hidden; min-width: 0; padding-right: 3px; }
+    .task {
+      flex: 0 1 190px; min-width: 0;
+      background: var(--white); box-shadow: 3px 3px 0 var(--ink); cursor: pointer;
+      white-space: nowrap; overflow: hidden; text-align: left;
+    }
+    .task span { overflow: hidden; text-overflow: ellipsis; }
+    .task.on { background: var(--lav-mid); transform: translate(3px, 3px); box-shadow: none; }
+    .task svg { width: 20px; height: 20px; flex: none; }
+    .tray { background: var(--white); font-size: 13px; }
+
+    .startmenu {
+      position: fixed; left: 10px; bottom: 64px; z-index: 10001;
+      display: flex; min-width: 250px;
+      background: var(--lav); border: var(--line); border-radius: 8px;
+      box-shadow: 8px 8px 0 var(--ink); overflow: hidden;
+    }
+    .startmenu[hidden] { display: none; }
+    .startmenu .side {
+      width: 34px; background: var(--blue); border-right: var(--line);
+      color: var(--white); writing-mode: vertical-rl; transform: rotate(180deg);
+      font: 900 20px/34px Verdana, sans-serif; letter-spacing: -0.02em; padding: 10px 0;
+    }
+    .startmenu .side span { color: var(--lav-mid); }
+    .startmenu ul { list-style: none; flex: 1; padding: 6px; }
+    .startmenu li button {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      padding: 7px 18px 7px 8px; background: none; border: 2px solid transparent; border-radius: 5px;
+      cursor: pointer; text-align: left; font-weight: bold;
+    }
+    .startmenu li button:hover, .startmenu li button:focus-visible { background: var(--magenta); color: var(--white); border-color: var(--ink); outline: none; }
+    .startmenu li svg { width: 26px; height: 26px; }
+
+    /* ---------- Skrivbordsläge (JS + bred skärm) ---------- */
+    html.floating body { overflow: hidden; }
+    html.floating .desktop { height: 100%; }
+    html.floating .icons { flex-direction: column; flex-wrap: nowrap; width: 92px; }
+    html.floating .win { position: absolute; margin: 0; }
+
+    @media (max-width: 560px) {
+      .about .panel, .project .panel { grid-template-columns: 1fr; }
+      .about .side { margin: -18px -20px 16px; border-right: 0; border-bottom: var(--line); display: flex; align-items: center; gap: 12px; }
+      .about .side svg { margin: 0; width: 48px; height: 48px; }
+      .about .text { min-height: 0; }
+      .paint .body { flex-direction: column; }
+      .toolbox { grid-template-columns: repeat(6, 32px); justify-content: space-between; }
+      .sizes { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); margin-top: 0; }
+      .palette { grid-template-columns: repeat(14, minmax(0, 1fr)); grid-auto-rows: auto; flex: 1; min-width: 0; gap: 2px; }
+      .swatch { aspect-ratio: 1; }
+      .current { width: 34px; height: 34px; padding: 4px; }
+      .task { flex: 0 0 44px; justify-content: center; padding: 0; }
+      .task span { display: none; }
+      .icons { display: grid; grid-template-columns: repeat(4, 1fr); }
+      .icon { width: auto; }
+      .icon span { font-size: 10px; padding: 2px 3px; }
+      .wallpaper { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .swatch:hover { transform: none; } }
   </style>
 </head>
 <body>
-  <div class="strip">
-    <div class="wrap">
-      <span>BOVEN.SE</span>
-      <span>C:\&gt; välkommen<span class="blink">_</span></span>
-    </div>
-  </div>
 
-  <main class="wrap grid">
-    <header class="block hero">
-      <h1>boven<span>.se</span></h1>
-      <p>Sidoprojekt, prototyper &amp; experiment.</p>
-    </header>
+  <!-- Ikoner, används med <use href="#i-…"> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-notepad" viewBox="0 0 32 32">
+      <rect x="6" y="3" width="20" height="26" rx="2" fill="#fff" stroke="#161616" stroke-width="2.5"/>
+      <rect x="6" y="3" width="20" height="6" fill="#ff9c0f" stroke="#161616" stroke-width="2.5"/>
+      <path d="M10 14h12M10 18h12M10 22h8" stroke="#a57de6" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-scale" viewBox="0 0 32 32">
+      <rect x="3" y="4" width="26" height="24" rx="3" fill="#e4d4ff" stroke="#161616" stroke-width="2.5"/>
+      <rect x="7" y="17" width="5" height="7" fill="#ff17d8" stroke="#161616" stroke-width="2"/>
+      <rect x="13.5" y="12" width="5" height="12" fill="#5a3cff" stroke="#161616" stroke-width="2"/>
+      <rect x="20" y="8" width="5" height="16" fill="#ff9c0f" stroke="#161616" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-flag" viewBox="0 0 32 32">
+      <path d="M7 3v26" stroke="#161616" stroke-width="3" stroke-linecap="round"/>
+      <rect x="8" y="5" width="20" height="14" rx="1" fill="#5a3cff" stroke="#161616" stroke-width="2.5"/>
+      <path d="M14 5v14M8 12h20" stroke="#ffe23a" stroke-width="3.5"/>
+      <rect x="8" y="5" width="20" height="14" rx="1" fill="none" stroke="#161616" stroke-width="2.5"/>
+    </symbol>
+    <symbol id="i-paint" viewBox="0 0 32 32">
+      <path d="M16 3C8 3 3 9 3 15.5 3 22 8 28 14 28c3 0 3-2.5 2-4-1-2 0-4 3-4h4c4 0 6-3 6-6C29 8 23 3 16 3z" fill="#e4d4ff" stroke="#161616" stroke-width="2.5"/>
+      <circle cx="10" cy="15" r="2.6" fill="#ff17d8" stroke="#161616" stroke-width="1.5"/>
+      <circle cx="13" cy="9" r="2.6" fill="#5a3cff" stroke="#161616" stroke-width="1.5"/>
+      <circle cx="20" cy="9" r="2.6" fill="#ff9c0f" stroke="#161616" stroke-width="1.5"/>
+      <circle cx="24" cy="14.5" r="2.6" fill="#13a0a6" stroke="#161616" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="i-logo" viewBox="0 0 20 20">
+      <rect x="1.5" y="1.5" width="7.5" height="7.5" rx="1" fill="#ff9c0f" stroke="#161616" stroke-width="1.5"/>
+      <rect x="11" y="1.5" width="7.5" height="7.5" rx="1" fill="#e4d4ff" stroke="#161616" stroke-width="1.5"/>
+      <rect x="1.5" y="11" width="7.5" height="7.5" rx="1" fill="#e4d4ff" stroke="#161616" stroke-width="1.5"/>
+      <rect x="11" y="11" width="7.5" height="7.5" rx="1" fill="#5a3cff" stroke="#161616" stroke-width="1.5"/>
+    </symbol>
+    <symbol id="c-min" viewBox="0 0 14 14"><rect x="2" y="9" width="10" height="3" fill="currentColor"/></symbol>
+    <symbol id="c-close" viewBox="0 0 14 14"><path d="M2.5 2.5l9 9M11.5 2.5l-9 9" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></symbol>
+    <symbol id="t-pencil" viewBox="0 0 18 18"><path d="M12 2.5l3.5 3.5L6 15.5H2.5V12z" fill="#ff9c0f" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 4.5l3.5 3.5" stroke="#161616" stroke-width="1.8"/></symbol>
+    <symbol id="t-brush" viewBox="0 0 18 18"><path d="M15.5 2.5L9 9" stroke="#161616" stroke-width="2.5" stroke-linecap="round"/><path d="M8 9.5c-2 0-3.5 1.5-3.5 3.5 0 1-1 2-2 2.5 3 1 7 0 7.5-3.5z" fill="#5a3cff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="t-eraser" viewBox="0 0 18 18"><path d="M10.5 2.5l5 5-7 7H4.5l-2-2z" fill="#fff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/><path d="M6.5 6.5l5 5" stroke="#161616" stroke-width="1.8"/><path d="M10.5 2.5l5 5-4 4-5-5z" fill="#ff17d8" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="t-fill" viewBox="0 0 18 18"><path d="M7 2.5l7 7-5 5-6.5-6.5z" fill="#fff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 9h10" stroke="#161616" stroke-width="1.8"/><path d="M15.5 11.5c0 0 1.5 2 1.5 3a1.5 1.5 0 01-3 0c0-1 1.5-3 1.5-3z" fill="#13a0a6" stroke="#161616" stroke-width="1.3"/></symbol>
+    <symbol id="t-clear" viewBox="0 0 18 18"><path d="M4 5h10l-1 11H5z" fill="#e4d4ff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/><path d="M2.5 5h13M7 5V2.5h4V5" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="t-save" viewBox="0 0 18 18"><path d="M2.5 2.5h10l3 3v10h-13z" fill="#5a3cff" stroke="#161616" stroke-width="1.8" stroke-linejoin="round"/><rect x="5.5" y="2.5" width="6" height="4" fill="#fff" stroke="#161616" stroke-width="1.5"/><rect x="5" y="10" width="8" height="5.5" fill="#e4d4ff" stroke="#161616" stroke-width="1.5"/></symbol>
+  </svg>
 
-    <div class="tiles" aria-hidden="true">
-      <div></div><div></div><div></div><div></div>
-    </div>
+  <div class="desktop" id="desktop">
+    <div class="wallpaper" aria-hidden="true">boven.se</div>
 
-    <section class="block window about">
-      <div class="titlebar"><span>om_mig.txt</span><span><i></i><i></i></span></div>
-      <div class="body">
-        <h2>Om mig</h2>
-        <p>Hej! Det här är min lilla hörna av webben. Här samlar jag saker jag bygger på fritiden – små sajter, prototyper och idéer som jag vill testa på riktigt.</p>
-        <p>Allt är handbyggt, lite ofärdigt och under ständig konstruktion. Precis som webben var förr.</p>
+    <nav class="icons" aria-label="Skrivbord">
+      <button class="icon" data-open="w-about"><svg><use href="#i-notepad"/></svg><span>om_mig.txt</span></button>
+      <button class="icon" data-open="w-rated"><svg><use href="#i-scale"/></svg><span>Under/<wbr>overrated</span></button>
+      <button class="icon" data-open="w-fraga"><svg><use href="#i-flag"/></svg><span>Fråga svenskarna</span></button>
+      <button class="icon" data-open="w-paint"><svg><use href="#i-paint"/></svg><span>Paint</span></button>
+    </nav>
+
+    <!--
+      Varje fönster är en <section class="win">.
+      Färg på ramen: c-orange, c-magenta, c-violet eller c-blue.
+      data-x / data-y = startposition som andel av skärmen (0–1), data-w = bredd i px.
+      data-icon = ikonen i Start-menyn och aktivitetsfältet.
+    -->
+
+    <section class="win about c-orange" id="w-about" data-title="om_mig.txt" data-icon="i-notepad" data-x="0.11" data-y="0.04" data-w="470">
+      <div class="panel">
+        <div class="side">
+          <svg><use href="#i-notepad"/></svg>
+          <small>boven.se</small>
+        </div>
+        <div class="text">
+          <p>Hej och välkommen!</p>
+          <p>Det här är min lilla hörna av webben. Här samlar jag saker jag bygger på fritiden – små sajter, prototyper och idéer som jag vill testa på riktigt.</p>
+          <p>Dra runt fönstren, kika på projekten och rita gärna något i Paint.</p>
+        </div>
       </div>
     </section>
 
-    <aside class="block quote">
-      <p>Bygg saker. Visa upp dem. Bygg fler.</p>
-    </aside>
+    <!-- data-progress = hur många av 20 rutor som är ifyllda -->
+    <section class="win project c-blue" id="w-rated" data-title="Under/overrated" data-icon="i-scale" data-x="0.56" data-y="0.05" data-w="420">
+      <div class="panel">
+        <svg class="big"><use href="#i-scale"/></svg>
+        <div>
+          <h2>Under/overrated</h2>
+          <p>Är det underskattat eller överskattat? Tyck till om allt möjligt.</p>
+          <div class="progress" data-progress="6" aria-hidden="true"></div>
+          <div class="progress-label">Bygger…</div>
+          <div class="meta">
+            <span class="tag">Kommer snart</span>
+            <!-- När projektet är live: <a class="btn" href="https://rated.boven.se">Öppna ↗</a> -->
+            <button class="btn" data-soon>Öppna ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <h2 class="section-title">▦ Projekt</h2>
+    <section class="win project c-violet" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-flag" data-x="0.62" data-y="0.43" data-w="420">
+      <div class="panel">
+        <svg class="big"><use href="#i-flag"/></svg>
+        <div>
+          <h2>Fråga svenskarna</h2>
+          <p>Vad tycker svenskarna egentligen? Ett experiment i att ställa frågor till hela landet.</p>
+          <div class="progress" data-progress="12" aria-hidden="true"></div>
+          <div class="progress-label">Prototyp…</div>
+          <div class="meta">
+            <span class="tag">Prototyp</span>
+            <!-- När projektet är live: <a class="btn" href="https://fraga.boven.se">Öppna ↗</a> -->
+            <button class="btn" data-soon>Öppna ↗</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- När ett projekt går live: byt <div> mot <a href="https://…"> och uppdatera taggen. -->
-    <div class="block project navy">
-      <span class="tag">Kommer snart</span>
-      <h3>Under/overrated</h3>
-      <p>Är det underskattat eller överskattat? Tyck till om allt möjligt.</p>
-    </div>
+    <section class="win paint c-magenta" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.17" data-y="0.44" data-w="500">
+      <div class="panel">
+        <div class="body">
+          <div class="toolbox" role="toolbar" aria-label="Verktyg">
+            <button class="tool on" data-tool="pencil" title="Penna" aria-label="Penna"><svg><use href="#t-pencil"/></svg></button>
+            <button class="tool" data-tool="brush" title="Pensel" aria-label="Pensel"><svg><use href="#t-brush"/></svg></button>
+            <button class="tool" data-tool="eraser" title="Suddgummi" aria-label="Suddgummi"><svg><use href="#t-eraser"/></svg></button>
+            <button class="tool" data-tool="fill" title="Fyll" aria-label="Fyll"><svg><use href="#t-fill"/></svg></button>
+            <button class="tool" data-action="clear" title="Rensa" aria-label="Rensa"><svg><use href="#t-clear"/></svg></button>
+            <button class="tool" data-action="save" title="Spara som PNG" aria-label="Spara som PNG"><svg><use href="#t-save"/></svg></button>
+            <div class="sizes">
+              <button class="size on" data-size="2" aria-label="Tunn"><i style="height:3px"></i></button>
+              <button class="size" data-size="5" aria-label="Mellan"><i style="height:6px"></i></button>
+              <button class="size" data-size="10" aria-label="Tjock"><i style="height:10px"></i></button>
+            </div>
+          </div>
+          <div class="canvas-well"><canvas id="canvas" width="400" height="260" aria-label="Rityta"></canvas></div>
+        </div>
+        <div class="palette-row">
+          <div class="current"><i id="current"></i></div>
+          <div class="palette" id="palette"></div>
+        </div>
+        <div class="statusbar" id="paint-status">Rita något!</div>
+      </div>
+    </section>
 
-    <div class="block project pale">
-      <span class="tag">Prototyp</span>
-      <h3>Fråga svenskarna</h3>
-      <p>Vad tycker svenskarna egentligen? Ett experiment i att ställa frågor till hela landet.</p>
-    </div>
+    <section class="win error c-magenta" id="w-error" data-title="Fel" data-icon="i-logo" data-x="0.35" data-y="0.3" data-w="380" hidden data-closed="1">
+      <div class="panel">
+        <div class="bang" aria-hidden="true">!</div>
+        <div>
+          <h2>ERROR</h2>
+          <p>Projektet är inte klart än. Kom tillbaka snart!</p>
+        </div>
+        <div class="actions">
+          <button class="btn" data-dismiss>Försök igen</button>
+          <button class="btn" data-dismiss>Avbryt</button>
+        </div>
+      </div>
+    </section>
 
-    <div class="block project ghost">
-      <p>+ fler projekt<br>under konstruktion</p>
-    </div>
-  </main>
+    <noscript><p class="win panel">Slå på JavaScript för att flytta fönster och rita i Paint.</p></noscript>
+  </div>
 
-  <footer>
-    <div class="wrap">
-      <span>© 2026 boven.se · Handkodad. Inga cookies.</span>
-      <span class="badges" aria-hidden="true">
-        <span class="badge"><b>HTML</b><span>för hand</span></span>
-        <span class="badge"><b>0kb</b><span>js</span></span>
-      </span>
-    </div>
+  <div class="startmenu" id="startmenu" hidden>
+    <div class="side">boven<span>.se</span></div>
+    <ul id="startlist"></ul>
+  </div>
+
+  <footer class="taskbar">
+    <button class="start" id="start" aria-expanded="false" aria-controls="startmenu"><svg><use href="#i-logo"/></svg>Start</button>
+    <div class="tasks" id="tasks"></div>
+    <div class="tray" id="clock">--:--</div>
   </footer>
+
+  <script>
+  (() => {
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+    const desktop = $('#desktop');
+    const wins = $$('.win[id]');
+    const wide = matchMedia('(min-width: 760px)');
+    const svgUse = id => `<svg><use href="#${id}"/></svg>`;
+    let z = 10;
+
+    /* ---------- Fönster ---------- */
+    wins.forEach(w => {
+      const bar = document.createElement('header');
+      bar.className = 'titlebar';
+      bar.innerHTML = `<span class="t"><b>${w.dataset.title}</b></span>
+        <button class="ctrl min" data-act="min" aria-label="Minimera">${svgUse('c-min')}</button>
+        <button class="ctrl" data-act="close" aria-label="Stäng">${svgUse('c-close')}</button>`;
+      w.prepend(bar);
+      w.setAttribute('role', 'dialog');
+      w.setAttribute('aria-label', w.dataset.title);
+      w.addEventListener('pointerdown', () => focusWin(w));
+      bar.addEventListener('click', e => {
+        const act = e.target.closest('.ctrl')?.dataset.act;
+        if (act) hideWin(w, act === 'close');
+      });
+      drag(w, bar);
+    });
+
+    function focusWin(w) {
+      wins.forEach(o => o.classList.toggle('active', o === w));
+      w.style.zIndex = ++z;
+      refresh();
+    }
+    function hideWin(w, close) {
+      w.hidden = true;
+      if (close) w.dataset.closed = '1';
+      refresh();
+    }
+    function openWin(id) {
+      const w = document.getElementById(id);
+      w.hidden = false; w.dataset.closed = '';
+      place(w);
+      focusWin(w);
+      if (!wide.matches) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function place(w) {
+      if (!wide.matches) { w.style.left = w.style.top = w.style.width = ''; return; }
+      const W = desktop.clientWidth, H = desktop.clientHeight - 56;
+      w.style.width = Math.min(+w.dataset.w, W - 130) + 'px';
+      if (!w.style.left) {
+        w.style.left = Math.max(120, w.dataset.x * W) + 'px';
+        w.style.top = w.dataset.y * H + 'px';
+      }
+      clamp(w);
+    }
+    function layout() {
+      document.documentElement.classList.toggle('floating', wide.matches);
+      wins.forEach(place);
+    }
+    function clamp(w) {
+      if (!wide.matches || w.hidden) return;
+      const W = desktop.clientWidth, H = desktop.clientHeight - 56;
+      const x = Math.min(Math.max(parseFloat(w.style.left) || 0, 0), Math.max(0, W - w.offsetWidth - 12));
+      const y = Math.min(Math.max(parseFloat(w.style.top) || 0, 0), Math.max(0, H - w.offsetHeight - 12));
+      w.style.left = x + 'px'; w.style.top = y + 'px';
+    }
+    function drag(w, handle) {
+      handle.addEventListener('pointerdown', e => {
+        if (!wide.matches || e.target.closest('.ctrl') || e.button > 0) return;
+        const sx = e.clientX - w.offsetLeft, sy = e.clientY - w.offsetTop;
+        handle.setPointerCapture(e.pointerId);
+        const move = ev => {
+          const W = desktop.clientWidth, H = desktop.clientHeight - 56;
+          w.style.left = Math.min(Math.max(ev.clientX - sx, 60 - w.offsetWidth), W - 60) + 'px';
+          w.style.top = Math.min(Math.max(ev.clientY - sy, 0), H - 42) + 'px';
+        };
+        const up = () => { handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up); };
+        handle.addEventListener('pointermove', move);
+        handle.addEventListener('pointerup', up);
+      });
+    }
+
+    /* ---------- Projekt ---------- */
+    $$('.progress').forEach(p => {
+      const n = +p.dataset.progress;
+      p.innerHTML = Array.from({ length: 20 }, (_, i) => `<i${i < n ? ' class="on"' : ''}></i>`).join('');
+    });
+    const errWin = $('#w-error');
+    $$('[data-soon]').forEach(b => b.onclick = () => {
+      errWin.style.left = ''; // centrera på nytt varje gång
+      openWin('w-error');
+    });
+    $$('[data-dismiss]').forEach(b => b.onclick = () => hideWin(errWin, true));
+
+    /* ---------- Ikoner ---------- */
+    $$('.icon').forEach(ic => {
+      ic.addEventListener('click', e => {
+        $$('.icon').forEach(o => o.classList.toggle('selected', o === ic));
+        // Dubbelklick med mus, enkelklick med finger eller tangentbord
+        if (e.detail === 0 || e.detail >= 2 || !matchMedia('(pointer: fine)').matches) openWin(ic.dataset.open);
+      });
+    });
+    desktop.addEventListener('pointerdown', e => {
+      if (!e.target.closest('.icon')) $$('.icon').forEach(o => o.classList.remove('selected'));
+    });
+
+    /* ---------- Aktivitetsfält & Start ---------- */
+    const tasks = $('#tasks'), start = $('#start'), menu = $('#startmenu');
+    function refresh() {
+      tasks.innerHTML = '';
+      wins.filter(w => !w.dataset.closed && w !== errWin).forEach(w => {
+        const b = document.createElement('button');
+        b.className = 'task' + (!w.hidden && w.classList.contains('active') ? ' on' : '');
+        b.innerHTML = `${svgUse(w.dataset.icon)}<span>${w.dataset.title}</span>`;
+        b.title = w.dataset.title;
+        b.onclick = () => {
+          if (!w.hidden && w.classList.contains('active')) hideWin(w, false);
+          else openWin(w.id);
+        };
+        tasks.append(b);
+      });
+    }
+    $('#startlist').innerHTML = wins.filter(w => w !== errWin).map(w =>
+      `<li><button data-open="${w.id}">${svgUse(w.dataset.icon)}${w.dataset.title.split(' – ')[0]}</button></li>`
+    ).join('');
+    const toggleMenu = open => {
+      menu.hidden = !open; start.classList.toggle('on', open); start.setAttribute('aria-expanded', open);
+    };
+    start.onclick = e => { e.stopPropagation(); toggleMenu(menu.hidden); };
+    menu.onclick = e => { const b = e.target.closest('[data-open]'); if (b) { openWin(b.dataset.open); toggleMenu(false); } };
+    document.addEventListener('click', e => { if (!menu.contains(e.target)) toggleMenu(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+
+    const clock = $('#clock');
+    const tick = () => clock.textContent = new Date().toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+    tick(); setInterval(tick, 15000);
+
+    /* ---------- Paint ---------- */
+    const cv = $('#canvas'), ctx = cv.getContext('2d', { willReadFrequently: true });
+    const colors = ['#161616','#6b6b6b','#5a3cff','#8a2cf0','#ff17d8','#ff9c0f','#ffe23a','#13a0a6','#1fbf5a','#e0263b','#2a5cff','#8fb8ff','#a0522d','#ff7aa8',
+                    '#ffffff','#c8c8c8','#3a1fb8','#c9a9f5','#ffb3f2','#ffd08a','#fff5a0','#9be6e8','#b5f0c5','#ffb0b8','#0a1a7a','#dde7ff','#e0b48a','#e4d4ff'];
+    let color = '#5a3cff', tool = 'pencil', size = 2, last = null;
+    const status = $('#paint-status');
+
+    const pal = $('#palette');
+    colors.forEach(c => {
+      const b = document.createElement('button');
+      b.className = 'swatch'; b.style.background = c; b.title = c; b.setAttribute('aria-label', 'Färg ' + c);
+      b.onclick = () => setColor(c);
+      pal.append(b);
+    });
+    function setColor(c) { color = c; $('#current').style.background = c; }
+    setColor(color);
+
+    const clear = () => { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, cv.width, cv.height); };
+    clear();
+
+    $$('.tool[data-tool]').forEach(b => b.onclick = () => {
+      tool = b.dataset.tool;
+      $$('.tool[data-tool]').forEach(o => o.classList.toggle('on', o === b));
+      status.textContent = b.title;
+    });
+    $$('.size').forEach(b => b.onclick = () => {
+      size = +b.dataset.size;
+      $$('.size').forEach(o => o.classList.toggle('on', o === b));
+    });
+    $('[data-action="clear"]').onclick = () => { clear(); status.textContent = 'Rensat.'; };
+    $('[data-action="save"]').onclick = () => {
+      const a = document.createElement('a');
+      a.download = 'boven-paint.png';
+      a.href = cv.toDataURL('image/png');
+      a.click();
+      status.textContent = 'Sparad som boven-paint.png';
+    };
+
+    const pos = e => {
+      const r = cv.getBoundingClientRect();
+      return [Math.floor((e.clientX - r.left) * cv.width / r.width), Math.floor((e.clientY - r.top) * cv.height / r.height)];
+    };
+    function stroke(a, b) {
+      ctx.strokeStyle = tool === 'eraser' ? '#fff' : color;
+      ctx.lineWidth = tool === 'pencil' ? size : tool === 'eraser' ? size * 3 : size * 2.5;
+      ctx.lineCap = ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(a[0] + 0.5, a[1] + 0.5); ctx.lineTo(b[0] + 0.5, b[1] + 0.5); ctx.stroke();
+    }
+    cv.addEventListener('pointerdown', e => {
+      if (e.button > 0) return;
+      const p = pos(e);
+      if (tool === 'fill') { fill(p[0], p[1], color); return; }
+      cv.setPointerCapture(e.pointerId);
+      last = p; stroke(p, p);
+    });
+    cv.addEventListener('pointermove', e => {
+      const p = pos(e);
+      status.textContent = `${Math.max(0, p[0])}, ${Math.max(0, p[1])}`;
+      if (!last) return;
+      stroke(last, p); last = p;
+    });
+    ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => last = null));
+
+    function fill(x, y, hex) {
+      const { width: W, height: H } = cv;
+      if (x < 0 || y < 0 || x >= W || y >= H) return;
+      const img = ctx.getImageData(0, 0, W, H), d = img.data;
+      const n = parseInt(hex.slice(1), 16), nc = [n >> 16, (n >> 8) & 255, n & 255];
+      const i0 = (y * W + x) * 4, tc = [d[i0], d[i0 + 1], d[i0 + 2]];
+      if (tc.every((v, k) => v === nc[k])) return;
+      const near = i => Math.abs(d[i] - tc[0]) + Math.abs(d[i + 1] - tc[1]) + Math.abs(d[i + 2] - tc[2]) < 96;
+      const seen = new Uint8Array(W * H), stack = [x + y * W];
+      while (stack.length) {
+        const p = stack.pop();
+        if (seen[p]) continue;
+        seen[p] = 1;
+        const i = p * 4;
+        if (!near(i)) continue;
+        d[i] = nc[0]; d[i + 1] = nc[1]; d[i + 2] = nc[2]; d[i + 3] = 255;
+        const px = p % W;
+        if (px > 0) stack.push(p - 1);
+        if (px < W - 1) stack.push(p + 1);
+        if (p >= W) stack.push(p - W);
+        if (p < W * (H - 1)) stack.push(p + W);
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+
+    /* ---------- Kör ---------- */
+    layout();
+    wide.addEventListener('change', layout);
+    addEventListener('resize', () => wins.forEach(clamp));
+    focusWin($('#w-about'));
+  })();
+  </script>
 </body>
 </html>
