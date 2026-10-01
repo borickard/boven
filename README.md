@@ -1,22 +1,25 @@
 # boven.se
 
-Personlig startsida som samlar mina projekt. Retro-skrivbord: flyttbara fönster (ett per projekt), Om mig, en liten Paint och ett aktivitetsfält med Start-meny.
+Personlig sajt som visar mina projekt som staplade kort: varje projekt är ett stort
+kort som glider upp över det förra när man scrollar. På mobil scrollar korten som vanligt.
 
 - `index.html` – hela sidan, en fil, ingen build, inga beroenden.
-- `fonts/vt323-latin.woff2` – typsnittet VT323 (SIL Open Font License), självhostat så att inga anrop går till Google.
-  Nytt fönster = ny `<section class="win">` (se kommentaren i filen) + en ikon i `<nav class="icons">`.
-  Nytt projekt = nytt projektfönster + en ikon i projektmappen (`#w-projects`).
+- `fonts/` – Inter Tight och IBM Plex Mono (SIL Open Font License), självhostade så att inga anrop går till Google.
+- Vercel Web Analytics är inkopplat (cookiefritt).
 
-## Projekt (subdomäner)
+## Lägga till eller ändra ett projekt
 
-Varje projekt får en egen subdomän som pekar på sin egen hosting (egen DNS-post,
-t.ex. CNAME). Den här sidan länkar bara till dem – byt projektets
-`<button class="btn" data-soon>` mot `<a class="btn" href="…">` i `index.html` när det går live.
+1. Kopiera ett `<article class="card">` i `index.html` och öka `--i` (0, 1, 2 …).
+2. Lägg till en rad i listan `.index` i introt.
+3. Ändras antalet kort: justera `5 * var(--tab)` i `.card` så att alla flikar får plats.
 
-| Projekt            | Adress                          |
-| ------------------ | ------------------------------- |
-| Sociala raketer    | https://www.socialaraketer.se/  |
-| Sanktan            | https://sanktan.vercel.app/     |
-| Ursäkten           | https://ursakter.vercel.app/    |
-| Fråga svenskarna   | pågår                           |
-| Under/overrated    | https://overunderrated.vercel.app/ |
+## Projekt
+
+| Projekt          | Status | Adress                             |
+| ---------------- | ------ | ---------------------------------- |
+| Sociala raketer  | Live   | https://www.socialaraketer.se/     |
+| Over/underrated  | Live   | https://overunderrated.vercel.app/ |
+| Speltid          | Live   | https://sanktan.vercel.app/ (speltid.nu på gång) |
+| Klotterväggen    | Pågår  | –                                  |
+
+Vilande, inte på sajten just nu: Fråga svenskarna, Ursäkten (https://ursakter.vercel.app/).

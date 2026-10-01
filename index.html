@@ -4,778 +4,387 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>boven.se</title>
-  <meta name="description" content="boven.se – sidoprojekt, prototyper och experiment.">
-  <meta name="theme-color" content="#13a3a8">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect x='1' y='1' width='14' height='14' fill='%23f7f6f2' stroke='%232f3a45'/><rect x='2.5' y='2.5' width='11' height='3' fill='%23bfe3dc' stroke='%232f3a45' stroke-width='.8'/><rect x='2.5' y='7' width='11' height='6.5' fill='%239ee9c8' stroke='%232f3a45' stroke-width='.8'/></svg>">
-  <link rel="preload" href="fonts/vt323-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="description" content="boven.se – digitala projekt: Sociala raketer, Over/underrated, Speltid och Klotterväggen.">
+  <meta name="theme-color" content="#f4f3ef">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%231d3cff'/><circle cx='11' cy='11' r='2.2' fill='%23fff'/></svg>">
+  <link rel="preload" href="fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
   <style>
     @font-face {
-      font-family: "VT323";
-      src: url("fonts/vt323-latin.woff2") format("woff2");
+      font-family: "Inter Tight";
+      src: url("fonts/inter-tight-latin.woff2") format("woff2");
+      font-weight: 400 800;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "IBM Plex Mono";
+      src: url("fonts/ibm-plex-mono-400-latin.woff2") format("woff2");
+      font-weight: 400;
       font-display: swap;
     }
     :root {
-      --ink:     #2f3a45;
-      --paper:   #f7f6f2;
-      --blush:   #eae8e1;
-      --pink:    #bfe3dc;
-      --rose:    #f08a5d;
-      --peach:   #ffd6aa;
-      --mint:    #9ee9c8;
-      --mint-lt: #d3f6e8;
-      --teal:    #19a3a6;
-      --teal-dk: #127f86;
-      --line: 1.5px solid var(--ink);
-      --accent: #ffc58f;
-      --grad: linear-gradient(180deg, var(--peach), #f39a72);
-      --font: "VT323", ui-monospace, "Courier New", monospace;
+      --bg: #f4f3ef;
+      --ink: #111;
+      --muted: #6f6d67;
+      --line: #d9d7d0;
+      --blue: #1d3cff;
+      --green: #00875f;
+      --yellow: #ffd400;
+      --stone: #e3e1da;
+      --top: 76px;   /* sidhuvudets höjd */
+      --tab: 30px;   /* hur mycket av varje undanskymt kort som syns */
+      --sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body { background: #13a3a8; color: var(--ink);
-      font: 19px/1.25 var(--font);
-      overflow-x: hidden;
-      -webkit-user-select: none;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font: 17px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+    /* ---------- Sidhuvud ---------- */
+    .site-head {
+      position: fixed; inset: 0 0 auto; z-index: 50; height: var(--top);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 40px; background: var(--bg);
     }
-    body::before {
-      content: ""; position: fixed; inset: 0; z-index: -1;
-      background:
-        linear-gradient(rgba(255,255,255,.38) 1px, transparent 1px) 0 0 / 56px 56px,
-        linear-gradient(90deg, rgba(255,255,255,.38) 1px, transparent 1px) 0 0 / 56px 56px,
-        linear-gradient(180deg, #13a3a8 0%, #4cc3b6 50%, #aef1d4 100%);
+    .logo { font-weight: 800; font-size: 21px; letter-spacing: -.03em; }
+    .logo i { color: var(--blue); font-style: normal; }
+    .site-head nav { display: flex; gap: 28px; font-size: 15px; color: var(--muted); }
+    .site-head nav a:hover { color: var(--ink); }
+
+    /* ---------- Intro ---------- */
+    .hero {
+      padding: calc(var(--top) + 72px) 40px 72px;
+      display: grid; grid-template-columns: 1.45fr 1fr; gap: 48px; align-items: end;
     }
-    button { font: inherit; color: inherit; }
-    a { color: var(--teal-dk); }
-    svg { overflow: visible; }
-
-    /* ---------- Knappar ---------- */
-    .btn {
-      display: inline-block; min-width: 84px; padding: 3px 14px;
-      background: var(--accent); color: var(--ink);
-      border: var(--line);
-      font-size: 22px; letter-spacing: .04em; text-align: center; text-decoration: none; text-transform: uppercase;
-      cursor: pointer;
+    .hero h1 { font-size: clamp(48px, 7vw, 92px); line-height: .95; letter-spacing: -.03em; font-weight: 800; word-spacing: .04em; }
+    .hero h1 span { color: var(--blue); }
+    .index { list-style: none; border-top: 1.5px solid var(--ink); }
+    .index a {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 18px; font-weight: 500;
+      transition: padding .15s;
     }
-    .btn:hover { background: var(--peach); }
-    .btn:active { transform: translateY(1px); }
+    .index a:hover { padding-left: 8px; color: var(--blue); }
+    .index small { font: 13px var(--mono); color: var(--muted); }
 
-    /* ---------- Skrivbord ---------- */
-    .desktop { position: relative; min-height: 100%; padding: 16px 16px 72px; }
-
-    .sparkle { position: fixed; width: 34px; height: 34px; pointer-events: none; }
-    .sparkle path { fill: #fff; opacity: .75; }
-
-    .icons { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-    .icon {
-      width: 96px; padding: 6px 2px;
-      background: none; border: 0; cursor: pointer;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-      text-align: center; font-size: 19px; line-height: 1;
+    /* ---------- Staplade kort ---------- */
+    .stack { padding: 0 40px 40px; }
+    .card {
+      position: sticky;
+      top: calc(var(--top) + var(--i) * var(--tab));
+      height: calc(100vh - var(--top) - 5 * var(--tab) - 24px);
+      min-height: 540px;
+      margin-bottom: 22vh;
+      border-radius: 26px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 -10px 30px rgba(0,0,0,.08);
     }
-    .icon svg { width: 46px; height: 46px; }
-    .icon span { padding: 2px 5px; }
-    .desktop > .icons .icon span { color: #fff; text-shadow: 1px 1px 0 var(--teal-dk); }
-    .icon:focus-visible { outline: none; }
-    .icon:focus-visible span, .icon.selected span,
-    .desktop > .icons .icon.selected span { background: var(--pink); color: var(--ink); text-shadow: none; outline: var(--line); }
-
-    /* ---------- Fönster ---------- */
-    .win {
-      background: var(--paper);
-      border: var(--line);
-      padding: 7px;
-      margin-bottom: 20px;
-      max-width: 100%;
+    .card:last-child { margin-bottom: 0; }
+    .tabrow {
+      height: var(--tab); flex: none; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 28px; font: 13px var(--mono); opacity: .8; text-align: left;
     }
-    .win[hidden] { display: none; }
-    .titlebar {
-      display: flex; align-items: center; gap: 6px;
-      height: 32px; padding: 0 5px 0 10px; margin-bottom: 7px;
-      background: #e2e5e1;
-      border: var(--line);
-      user-select: none;
-      touch-action: none;
+    .tabrow:hover { opacity: 1; }
+    .body { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1.05fr; gap: 44px; padding: 16px 44px 40px; }
+    .kicker { font: 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+    .card h2 { font-size: clamp(56px, 7.4vw, 104px); line-height: .9; letter-spacing: -.04em; font-weight: 800; margin-top: 18px; hyphens: manual; }
+    .lede { font-size: 19px; max-width: 450px; margin-top: 22px; opacity: .92; }
+    .cta { display: inline-block; margin-top: 26px; border-radius: 99px; padding: 12px 22px; font-weight: 700; transition: transform .15s; }
+    .cta:hover { transform: translateY(-2px); }
+    .vis { position: relative; min-height: 0; display: flex; align-items: center; justify-content: center; }
+    .note { display: block; margin-top: 10px; font: 12px var(--mono); opacity: .55; }
+
+    /* 01 Sociala raketer */
+    .c-raketer { background: var(--blue); color: #fff; }
+    .c-raketer .cta { background: #fff; color: var(--blue); }
+    .browser { width: 100%; max-width: 560px; background: #fff; color: var(--ink); border-radius: 14px; overflow: hidden; transform: rotate(2deg); box-shadow: 0 40px 80px rgba(0,0,40,.4); }
+    .browser .bar { height: 32px; background: #eceaf2; display: flex; gap: 7px; align-items: center; padding: 0 14px; }
+    .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #cfcbd8; }
+    .browser .bar span { margin-left: 12px; font: 12px var(--mono); color: #888; background: #fff; border-radius: 6px; padding: 2px 10px; }
+    .vids { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 14px; }
+    .vid { aspect-ratio: 9 / 15; border-radius: 10px; position: relative; }
+    .vid::after { content: "▶"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 20px; }
+    .vid b { position: absolute; left: 6px; top: 6px; font: 700 12px var(--sans); background: #fff; border-radius: 5px; padding: 1px 6px; }
+
+    /* 02 Over/underrated */
+    .c-rated { background: var(--ink); color: #fff; }
+    .c-rated .cta { background: var(--blue); color: #fff; }
+    .votes { width: 100%; max-width: 480px; }
+    .votes .ends { display: flex; justify-content: space-between; font: 12px var(--mono); color: #999; margin-bottom: 4px; }
+    .vote { display: grid; grid-template-columns: 1fr 64px; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid #333; }
+    .vote b { font-size: 21px; font-weight: 700; }
+    .vote .pct { font-size: 22px; font-weight: 700; text-align: right; }
+    .meter { height: 10px; border-radius: 99px; background: #9cb0ff; margin-top: 8px; overflow: hidden; }
+    .meter i { display: block; height: 100%; background: var(--blue); }
+
+    /* 03 Speltid */
+    .c-speltid { background: var(--green); color: #fff; }
+    .c-speltid .cta { background: #fff; color: var(--green); }
+    .plan { width: 100%; max-width: 560px; display: grid; grid-template-columns: 200px 1fr; gap: 22px; background: #fff; color: var(--ink); border-radius: 16px; padding: 18px; box-shadow: 0 30px 60px rgba(0,30,20,.35); }
+    .pitch { aspect-ratio: 2 / 3; position: relative; background: #0b9a6c; border: 2px solid #fff; border-radius: 8px; }
+    .pitch::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px solid #fff9; }
+    .pitch::after { content: ""; position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px; border: 2px solid #fff9; border-radius: 50%; }
+    .pl { position: absolute; width: 26px; height: 26px; margin: -13px; border-radius: 50%; background: #fff; color: #0b9a6c; font: 700 11px var(--sans); display: grid; place-items: center; }
+    .mins h4 { font-size: 14px; margin-bottom: 8px; }
+    .mrow { display: grid; grid-template-columns: 56px 1fr 32px; gap: 8px; align-items: center; font-size: 13px; margin-bottom: 7px; }
+    .mrow .t { height: 10px; border-radius: 99px; background: #e6efe9; overflow: hidden; }
+    .mrow .t i { display: block; height: 100%; background: #0b9a6c; }
+    .sub { margin-top: 10px; background: #fff4c2; border-radius: 8px; padding: 8px 10px; font-size: 13px; }
+
+    /* 04 Klotterväggen */
+    .c-klotter { background: var(--yellow); color: var(--ink); }
+    .wall { width: 100%; max-width: 560px; background: #fff; border-radius: 16px; padding: 16px; box-shadow: 0 30px 60px rgba(80,60,0,.25); }
+    .wall canvas { display: block; width: 100%; aspect-ratio: 64 / 40; image-rendering: pixelated; border-radius: 6px; background: var(--bg); cursor: crosshair; touch-action: none; }
+    .wall-bar { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+    .sw { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1.5px #ccc; }
+    .sw.on { box-shadow: 0 0 0 2px var(--ink); }
+    .left { margin-left: auto; font: 14px var(--mono); white-space: nowrap; }
+    .budget { height: 8px; border-radius: 99px; background: #eee; margin-top: 8px; overflow: hidden; }
+    .budget i { display: block; height: 100%; width: 100%; background: var(--ink); transition: width .1s; }
+    .opts { display: flex; gap: 10px; margin-top: 14px; }
+    .opts div { flex: 1; border: 1.5px solid var(--ink); border-radius: 10px; padding: 8px 10px; font-size: 13px; opacity: .6; }
+    .opts b { display: block; font-size: 14px; }
+    .try .m { display: none; }
+
+    /* 05 Om */
+    .c-om { background: var(--stone); color: var(--ink); }
+    .c-om h2 { font-size: clamp(48px, 5.6vw, 76px); }
+    .mark { width: min(340px, 100%); aspect-ratio: 4 / 5; border-radius: 20px; background: var(--ink); color: #fff; display: grid; place-items: center; transform: rotate(-2deg); font-weight: 800; font-size: 150px; letter-spacing: -.04em; white-space: nowrap; }
+    .mark i { color: var(--blue); font-style: normal; }
+
+    .site-foot { padding: 40px; display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
+
+    /* ---------- Mobil: korten scrollar som vanligt, utan stapling ---------- */
+    @media (max-width: 760px) {
+      :root { --top: 60px; --tab: 28px; }
+      .site-head { padding: 0 18px; }
+      .site-head nav { gap: 16px; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: calc(var(--top) + 32px) 18px 40px; }
+      .stack { padding: 0 10px 10px; }
+      .card { position: relative; top: auto; height: auto; min-height: 0; margin-bottom: 12px; border-radius: 20px; }
+      .body { grid-template-columns: 1fr; gap: 26px; padding: 8px 20px 24px; }
+      .card h2 { margin-top: 10px; }
+      .lede { font-size: 16px; margin-top: 12px; }
+      .cta { margin-top: 16px; }
+      .vids { grid-template-columns: repeat(3, 1fr); }
+      .vid:nth-child(4) { display: none; }
+      .plan { grid-template-columns: 110px 1fr; gap: 12px; padding: 12px; }
+      .opts { flex-direction: column; }
+      .try .d { display: none; } .try .m { display: inline; }
+      .mark { font-size: 96px; max-width: 220px; }
+      .wall-bar { gap: 7px; }
+      .sw { width: 22px; height: 22px; }
+      .left { font-size: 12px; }
+      .site-foot { padding: 24px 18px; }
     }
-    .win.active .titlebar { background: var(--pink); }
-    html.floating .titlebar { cursor: grab; }
-    html.floating .titlebar:active { cursor: grabbing; }
-    .titlebar .t { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 21px; }
-    .win:not(.active) .titlebar .t { opacity: .6; }
-    .ctrl {
-      width: 24px; height: 22px; flex: none;
-      display: grid; place-items: center;
-      background: #fff; border: var(--line);
-      cursor: pointer;
-    }
-    .ctrl svg { width: 12px; height: 12px; }
-    .ctrl:hover { background: var(--mint-lt); }
-
-    .panel { background: var(--blush); border: var(--line); padding: 16px 18px; }
-    .panel p + p { margin-top: .6em; }
-    .cell { background: #fff; border: var(--line); display: grid; place-items: center; }
-
-    /* Om mig */
-    .about .panel { display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: start; }
-    .portrait { aspect-ratio: 1; overflow: hidden; background: var(--grad); border: var(--line); position: relative; display: grid; place-items: center; }
-    .portrait > svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .portrait .s { position: absolute; width: 16px; height: 16px; }
-    .portrait .s path { fill: #fff; stroke: var(--ink); stroke-width: 1.2; }
-    .about h1 { font-size: 34px; line-height: 1; margin-bottom: 8px; font-weight: normal; }
-    .about .sig { margin-top: 10px; color: var(--teal-dk); }
-
-    /* Mapp */
-    .folder .panel { background: #fff; padding: 12px 8px; }
-    .folder-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px 4px; }
-    .folder-icons .icon { width: auto; }
-    .folder-status { font-size: 17px; padding: 5px 2px 0; }
-
-    /* Projekt */
-    .project .panel { display: grid; grid-template-columns: 78px 1fr; gap: 16px; align-items: start; }
-    .project .cell { width: 78px; height: 78px; }
-    .project .cell svg { width: 50px; height: 50px; }
-    .project h2 { font-size: 34px; line-height: 1; font-weight: normal; margin-bottom: 6px; }
-    .player { margin-top: 14px; background: #fff; border: var(--line); padding: 8px 10px 6px; }
-    .slider { position: relative; height: 8px; background: var(--mint-lt); border: var(--line); }
-    .slider i { position: absolute; inset: 0 auto 0 0; background: var(--teal); }
-    .slider b { position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #fff; border: var(--line); }
-    .slider-labels { display: flex; justify-content: space-between; font-size: 16px; margin-top: 3px; }
-    .project .meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-    .tag.live::before { content: "● "; color: var(--teal); }
-    .tag { font-size: 17px; text-transform: uppercase; letter-spacing: .06em; padding: 1px 8px; background: #fff; border: var(--line); }
-
-    /* Dialogrutor med staplade fönster bakom */
-    .dialog .panel { text-align: center; background: var(--pink); padding: 22px 18px; }
-    .dialog h2 { font-size: 30px; line-height: 1.05; font-weight: normal; letter-spacing: .06em; text-transform: uppercase; }
-    .dialog p { margin-top: 8px; }
-    .dialog .actions { display: flex; justify-content: center; gap: 12px; padding: 10px 0 3px; }
-    html.floating .dialog {
-      box-shadow:
-        6px -6px 0 0 #e6e3da, 6px -6px 0 1.5px var(--ink),
-        12px -12px 0 0 #eae1d3, 12px -12px 0 1.5px var(--ink),
-        18px -18px 0 0 #eddfcc, 18px -18px 0 1.5px var(--ink),
-        24px -24px 0 0 #f1ddc5, 24px -24px 0 1.5px var(--ink),
-        30px -30px 0 0 #f4dcbf, 30px -30px 0 1.5px var(--ink),
-        36px -36px 0 0 #f8dab8, 36px -36px 0 1.5px var(--ink),
-        42px -42px 0 0 #fbd8b1, 42px -42px 0 1.5px var(--ink),
-        48px -48px 0 0 #ffd6aa, 48px -48px 0 1.5px var(--ink);
-    }
-
-    /* Paint */
-    .paint .panel { padding: 10px; background: var(--blush); }
-    .paint .body { display: flex; gap: 10px; }
-    .toolbox { display: grid; grid-template-columns: repeat(2, 34px); grid-auto-rows: 34px; align-content: start; }
-    .tool {
-      display: grid; place-items: center;
-      background: #fff; border: var(--line); margin: 0 -1.5px -1.5px 0;
-      cursor: pointer;
-    }
-    .tool svg { width: 20px; height: 20px; }
-    .tool:hover { background: var(--mint-lt); }
-    .tool.on { background: var(--pink); }
-    .sizes { grid-column: span 2; display: flex; margin-top: 8px; background: #fff; border: var(--line); }
-    .size { flex: 1; height: 24px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
-    .size i { display: block; border-radius: 50%; background: var(--ink); }
-    .size.on { background: var(--mint); }
-    .canvas-well { flex: 1; min-width: 0; }
-    canvas { display: block; width: 100%; border: var(--line); touch-action: none; cursor: crosshair; background: #f9bf96; }
-    .palette-row { display: flex; gap: 14px; align-items: center; margin-top: 10px; }
-    .colors { position: relative; width: 50px; height: 44px; flex: none; }
-    .colors button { position: absolute; width: 30px; height: 30px; border: var(--line); cursor: pointer; padding: 0; }
-    .colors #prev { left: 0; top: 0; }
-    .colors #current { right: 0; bottom: 0; }
-    .palette { display: grid; grid-template-columns: repeat(8, 26px); grid-auto-rows: 20px; gap: 5px; }
-    .swatch { border: var(--line); cursor: pointer; padding: 0; }
-    .swatch:hover { transform: translateY(-2px); }
-    .statusbar { margin-top: 8px; font-size: 17px; }
-
-    /* ---------- Aktivitetsfält ---------- */
-    .taskbar {
-      position: fixed; left: 0; right: 0; bottom: 0; z-index: 10000;
-      height: 52px; padding: 8px 10px;
-      display: flex; gap: 8px; align-items: stretch;
-      background: var(--paper); border-top: var(--line);
-    }
-    .start, .task, .tray { display: flex; align-items: center; gap: 7px; padding: 0 12px; border: var(--line); font-size: 20px; }
-    .start { background: var(--mint); cursor: pointer; }
-    .start:hover, .start.on { background: var(--mint-lt); }
-    .start svg { width: 18px; height: 18px; }
-    .tasks { flex: 1; display: flex; gap: 8px; overflow: hidden; min-width: 0; }
-    .task { flex: 0 1 190px; min-width: 0; background: #fff; cursor: pointer; white-space: nowrap; overflow: hidden; text-align: left; }
-    .task span { overflow: hidden; text-overflow: ellipsis; }
-    .task.on { background: var(--pink); }
-    .task svg { width: 20px; height: 20px; flex: none; }
-    .tray { background: var(--blush); }
-
-    .startmenu {
-      position: fixed; left: 10px; bottom: 60px; z-index: 10001;
-      display: flex; min-width: 250px;
-      background: var(--paper); border: var(--line);
-    }
-    .startmenu[hidden] { display: none; }
-    .startmenu .side {
-      width: 34px; background: linear-gradient(0deg, var(--mint), var(--teal)); border-right: var(--line);
-      color: #fff; writing-mode: vertical-rl; transform: rotate(180deg);
-      font-size: 26px; line-height: 34px; padding: 10px 0; text-shadow: 1px 1px 0 var(--teal-dk);
-    }
-    .startmenu ul { list-style: none; flex: 1; padding: 6px; }
-    .startmenu li button {
-      width: 100%; display: flex; align-items: center; gap: 10px;
-      padding: 5px 18px 5px 8px; background: none; border: 1.5px solid transparent;
-      cursor: pointer; text-align: left; font-size: 21px;
-    }
-    .startmenu li button:hover, .startmenu li button:focus-visible { background: var(--pink); border-color: var(--ink); outline: none; }
-    .startmenu li svg { width: 26px; height: 26px; }
-
-    /* ---------- Skrivbordsläge (JS + bred skärm) ---------- */
-    html.floating body { overflow: hidden; }
-    html.floating .desktop { height: 100%; }
-    html.floating .desktop > .icons { flex-direction: column; flex-wrap: nowrap; width: 96px; }
-    html.floating .win { position: absolute; margin: 0; }
-
-    @media (max-width: 560px) {
-      .about .panel { grid-template-columns: 90px 1fr; gap: 14px; }
-      .project .panel { grid-template-columns: 1fr; }
-      .paint .body { flex-direction: column; }
-      .toolbox { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 34px; }
-      .sizes { grid-column: 1 / -1; }
-      .palette { grid-template-columns: repeat(8, minmax(0, 1fr)); flex: 1; min-width: 0; }
-      .task { flex: 0 0 44px; justify-content: center; padding: 0; }
-      .task span { display: none; }
-      .desktop > .icons { display: grid; grid-template-columns: repeat(3, 1fr); }
-      .icon { width: auto; }
-      .sparkle { display: none; }
-    }
-    @media (prefers-reduced-motion: reduce) { .swatch:hover { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
   <!-- Vercel Web Analytics (cookiefri) -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+  <header class="site-head">
+    <a class="logo" href="#">boven<i>.</i>se</a>
+    <nav><a href="#raketer" data-jump>Projekt</a><a href="#om" data-jump>Om</a></nav>
+  </header>
 
-  <!-- Ikoner, används med <use href="#i-…">. Tunna linjer, pastellfyllning. -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <linearGradient id="g-sunset" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd6aa"/><stop offset="1" stop-color="#f39a72"/></linearGradient>
-    </defs>
-    <symbol id="i-page" viewBox="0 0 32 32">
-      <path d="M7 3h13l6 6v20H7z" fill="#eae8e1" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M20 3v6h6" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M11 15h11M11 19h11M11 23h7" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="i-folder" viewBox="0 0 32 32">
-      <path d="M4 9h9l2-3h8l2 3" fill="#19a3a6" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <rect x="3" y="9" width="26" height="18" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5"/>
-    </symbol>
-    <symbol id="i-paint" viewBox="0 0 32 32">
-      <rect x="3" y="5" width="26" height="22" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
-      <rect x="6" y="8" width="20" height="16" fill="url(#g-sunset)" stroke="#2f3a45" stroke-width="1.5"/>
-      <path d="M16 11l1.2 3.8L21 16l-3.8 1.2L16 21l-1.2-3.8L11 16l3.8-1.2z" fill="#fff" stroke="#2f3a45" stroke-width="1.1" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="i-star" viewBox="0 0 32 32">
-      <path d="M16 4l3.6 7.6 8.2 1-6 5.7 1.6 8.2L16 22.5l-7.4 4 1.6-8.2-6-5.7 8.2-1z" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="i-cloud" viewBox="0 0 32 32">
-      <path d="M9 24h15a5 5 0 000-10 7 7 0 00-13-2 6 6 0 00-2 12z" fill="#fff" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <circle cx="13" cy="18.5" r="1.3" fill="#2f3a45"/><circle cx="18" cy="18.5" r="1.3" fill="#2f3a45"/><circle cx="23" cy="18.5" r="1.3" fill="#2f3a45"/>
-    </symbol>
-    <symbol id="i-rocket" viewBox="0 0 32 32">
-      <path d="M16 3c5 3.5 6.5 9.5 5.5 16h-11C9.5 12.5 11 6.5 16 3z" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <circle cx="16" cy="12" r="2.8" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.5"/>
-      <path d="M10.5 15l-4 5v3.5l4.5-2.5zM21.5 15l4 5v3.5l-4.5-2.5z" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M13 19.5l3 7 3-7" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="i-drop" viewBox="0 0 32 32">
-      <path d="M16 3s9 10.5 9 16.5a9 9 0 01-18 0C7 13.5 16 3 16 3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M11.5 19.5a4.5 4.5 0 003 4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="i-ball" viewBox="0 0 32 32">
-      <circle cx="16" cy="16" r="12" fill="#fff" stroke="#2f3a45" stroke-width="1.5"/>
-      <path d="M16 10.5l5 3.6-1.9 5.9h-6.2L11 14.1z" fill="#2f3a45"/>
-      <path d="M16 10.5V4.5M21 14.1l5.8-1.8M19.1 20l3.6 5M12.9 20l-3.6 5M11 14.1l-5.8-1.8" stroke="#2f3a45" stroke-width="1.5"/>
-    </symbol>
-    <symbol id="i-chart" viewBox="0 0 32 32">
-      <rect x="4" y="5" width="24" height="22" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
-      <rect x="8" y="17" width="4" height="7" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.3"/>
-      <rect x="14" y="12" width="4" height="12" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.3"/>
-      <rect x="20" y="9" width="4" height="15" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.3"/>
-    </symbol>
-    <symbol id="i-phone" viewBox="0 0 32 32">
-      <rect x="9" y="3" width="14" height="26" rx="2.5" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.5"/>
-      <path d="M12 9h8a1.5 1.5 0 011.5 1.5v5A1.5 1.5 0 0120 17h-4.5l-3 2.5V17H12a1.5 1.5 0 01-1.5-1.5v-5A1.5 1.5 0 0112 9z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.3" stroke-linejoin="round"/>
-      <path d="M14 25h4" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="i-sun" viewBox="0 0 32 32">
-      <path d="M5 21a11 11 0 0122 0z" fill="#ffc58f" stroke="#2f3a45" stroke-width="1.5" stroke-linejoin="round"/>
-      <path d="M7.5 15h17M6 18h20" stroke="#2f3a45" stroke-width="1.2"/>
-      <path d="M3 21h26M3 25h26M16 21v7M10 21l-4 7M22 21l4 7" stroke="#2f3a45" stroke-width="1.5" stroke-linecap="round"/>
-    </symbol>
-    <symbol id="i-spark" viewBox="0 0 20 20">
-      <path d="M10 1l2 7 7 2-7 2-2 7-2-7-7-2 7-2z" stroke-linejoin="round"/>
-    </symbol>
-    <symbol id="c-min" viewBox="0 0 12 12"><path d="M2 9.5h8" stroke="#2f3a45" stroke-width="1.5"/></symbol>
-    <symbol id="c-close" viewBox="0 0 12 12"><path d="M2 2l8 8M10 2l-8 8" stroke="#2f3a45" stroke-width="1.5"/></symbol>
-    <symbol id="t-pencil" viewBox="0 0 20 20"><path d="M13.5 2.5l4 4L7 17H3v-4z" fill="#ffd6aa" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 4.5l4 4" stroke="#2f3a45" stroke-width="1.4"/></symbol>
-    <symbol id="t-brush" viewBox="0 0 20 20"><path d="M17.5 2.5L10 10" stroke="#2f3a45" stroke-width="1.6" stroke-linecap="round"/><path d="M9 10.5c-2.3 0-4 1.7-4 4 0 1-1 2.2-2.2 2.7 3.4 1.2 7.8 0 8.4-4z" fill="#f08a5d" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-eraser" viewBox="0 0 20 20"><path d="M11.5 3l5.5 5.5-7.5 7.5H5l-2.5-2.5z" fill="#fff" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M11.5 3l5.5 5.5-4.5 4.5L7 7.5z" fill="#bfe3dc" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-fill" viewBox="0 0 20 20"><path d="M8 3l7.5 7.5-5.5 5.5L3 9z" fill="#fff" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M3.5 9.5h11" stroke="#2f3a45" stroke-width="1.4"/><path d="M17 12.5s1.7 2.2 1.7 3.3a1.7 1.7 0 01-3.4 0c0-1.1 1.7-3.3 1.7-3.3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.2"/></symbol>
-    <symbol id="t-clear" viewBox="0 0 20 20"><path d="M4.5 6h11l-1 11h-9z" fill="#eae8e1" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><path d="M3 6h14M8 6V3.5h4V6" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/></symbol>
-    <symbol id="t-save" viewBox="0 0 20 20"><path d="M3 3h11l3 3v11H3z" fill="#9ee9c8" stroke="#2f3a45" stroke-width="1.4" stroke-linejoin="round"/><rect x="6" y="3" width="7" height="4.5" fill="#fff" stroke="#2f3a45" stroke-width="1.2"/><rect x="5.5" y="11" width="9" height="6" fill="#f7f6f2" stroke="#2f3a45" stroke-width="1.2"/></symbol>
-  </svg>
+  <section class="hero">
+    <h1>Jag bygger tjänster folk <span>faktiskt använder.</span></h1>
+    <ul class="index">
+      <li><a href="#raketer" data-jump>Sociala raketer <small>01 · Live</small></a></li>
+      <li><a href="#rated" data-jump>Over/underrated <small>02 · Live</small></a></li>
+      <li><a href="#speltid" data-jump>Speltid <small>03 · Live</small></a></li>
+      <li><a href="#klotter" data-jump>Klotterväggen <small>04 · Pågår</small></a></li>
+    </ul>
+  </section>
 
-  <svg class="sparkle" style="left:58%;top:8%"><use href="#i-spark"/></svg>
-  <svg class="sparkle" style="left:90%;top:52%;width:22px;height:22px"><use href="#i-spark"/></svg>
-  <svg class="sparkle" style="left:44%;top:78%;width:26px;height:26px"><use href="#i-spark"/></svg>
-
-  <div class="desktop" id="desktop">
-    <nav class="icons" aria-label="Skrivbord">
-      <button class="icon" data-open="w-about"><svg><use href="#i-page"/></svg><span>om_mig.txt</span></button>
-      <button class="icon" data-open="w-projects"><svg><use href="#i-folder"/></svg><span>Projekt</span></button>
-      <button class="icon" data-open="w-paint"><svg><use href="#i-paint"/></svg><span>Paint</span></button>
-    </nav>
-
-    <!--
-      Varje fönster är en <section class="win">.
-      data-x / data-y = startposition som andel av skärmen (0–1), data-w = bredd i px.
-      data-icon = ikonen i titelraden, Start-menyn och aktivitetsfältet.
-      hidden data-closed="1" = stängt från start.
-    -->
-
-    <section class="win about" id="w-about" data-title="om_mig.txt" data-icon="i-page" data-x="0.09" data-y="0.04" data-w="500">
-      <div class="panel">
-        <div class="portrait" aria-hidden="true">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-            <defs><clipPath id="sun-cut"><path d="M24 58a26 26 0 0152 0z"/></clipPath></defs>
-            <path d="M24 58a26 26 0 0152 0z" fill="#ffe2b8"/>
-            <path d="M20 44h60M20 50h60M20 55h60" stroke="#f39a72" stroke-width="2.4" clip-path="url(#sun-cut)"/>
-            <path d="M24 58a26 26 0 0152 0" fill="none" stroke="#2f3a45" stroke-width="1.6"/>
-            <rect x="0" y="58" width="100" height="42" fill="#19a3a6"/>
-            <path d="M0 58h100M0 64h100M0 72h100M0 83h100M50 58v42M38 58l-18 42M62 58l18 42M26 58L-8 100M74 58l34 42" stroke="#9ee9c8" stroke-width="1.2" fill="none"/>
-            <path d="M0 58h100" stroke="#2f3a45" stroke-width="1.6"/>
-          </svg>
-          <svg class="s" style="left:12%;top:10%"><use href="#i-spark"/></svg>
-          <svg class="s" style="right:12%;top:22%;width:11px;height:11px"><use href="#i-spark"/></svg>
-        </div>
+  <!--
+    Varje projekt är ett <article class="card">. --i styr staplingsordningen (0, 1, 2 …).
+    Nytt kort: kopiera ett befintligt, öka --i och lägg till en rad i .index ovan.
+    Om antalet kort ändras: justera "5 * var(--tab)" i .card så att alla flikar får plats.
+  -->
+  <main class="stack">
+    <article class="card c-raketer" id="raketer" style="--i:0">
+      <a class="tabrow" href="#raketer" data-jump><span>01 · Sociala raketer</span><span>Live</span></a>
+      <div class="body">
         <div>
-          <h1>Om boven.se</h1>
-          <p>Här samlar jag mina digitala projekt – från lanserade tjänster till prototyper och experiment.</p>
-          <p>De flesta utgår från ett konkret behov: att hitta det mest engagerande innehållet på TikTok, att fördela speltid rättvist i en fotbollsmatch eller att kunna lämna en social situation utan att behöva förklara sig.</p>
-          <p>Alla projekt finns i mappen C:\Projekt.</p>
+          <p class="kicker">Mitt största projekt · TikTok</p>
+          <h2>Sociala<br>raketer</h2>
+          <p class="lede">Det mest engagerande innehållet från svenska varumärken och organisationer på TikTok – samlat och rankat.</p>
+          <a class="cta" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Besök socialaraketer.se ↗</a>
+        </div>
+        <div class="vis" aria-hidden="true">
+          <div class="browser">
+            <div class="bar"><i></i><i></i><i></i><span>socialaraketer.se</span></div>
+            <div class="vids">
+              <div class="vid" style="background:linear-gradient(160deg,#2a5cff,#9cb0ff)"><b>#1</b></div>
+              <div class="vid" style="background:linear-gradient(160deg,#ff5a36,#ffb36b)"><b>#2</b></div>
+              <div class="vid" style="background:linear-gradient(160deg,#111,#555)"><b>#3</b></div>
+              <div class="vid" style="background:linear-gradient(160deg,#00a37a,#9cf0d9)"><b>#4</b></div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </article>
 
-    <section class="win project" id="w-rated" data-title="Under/overrated" data-icon="i-star" data-x="0.45" data-y="0.03" data-w="390">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-star"/></svg></div>
+    <article class="card c-rated" id="rated" style="--i:1">
+      <a class="tabrow" href="#rated" data-jump><span>02 · Over/underrated</span><span>Live</span></a>
+      <div class="body">
         <div>
-          <h2>Under/overrated</h2>
-          <p>En plattform där vi tillsammans listar ut vad som är mest överskattat och mest underskattat. Vad som helst kan läggas till.</p>
-          <div class="meta">
-            <span class="tag live">Live</span>
-            <a class="btn" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
+          <p class="kicker">Community · Omröstning</p>
+          <h2>Over/<br>under&shy;rated</h2>
+          <p class="lede">Vi listar tillsammans ut vad som är mest överskattat och mest underskattat. Vad som helst kan läggas till.</p>
+          <a class="cta" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Rösta nu ↗</a>
+        </div>
+        <div class="vis" aria-hidden="true">
+          <div class="votes">
+            <div class="ends"><span>← Underrated</span><span>Overrated →</span></div>
+            <div class="vote"><div><b>Surströmming</b><div class="meter"><i style="width:72%"></i></div></div><span class="pct">72%</span></div>
+            <div class="vote"><div><b>Måndagar</b><div class="meter"><i style="width:31%"></i></div></div><span class="pct">31%</span></div>
+            <div class="vote"><div><b>Ikea-köttbullar</b><div class="meter"><i style="width:58%"></i></div></div><span class="pct">58%</span></div>
+            <div class="vote"><div><b>Lösgodis</b><div class="meter"><i style="width:19%"></i></div></div><span class="pct">19%</span></div>
+            <span class="note">Exempel</span>
           </div>
         </div>
       </div>
-    </section>
+    </article>
 
-    <section class="win project" id="w-ursakten" data-title="Ursäkten" data-icon="i-phone" data-x="0.74" data-y="0.03" data-w="390">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-phone"/></svg></div>
+    <article class="card c-speltid" id="speltid" style="--i:2">
+      <a class="tabrow" href="#speltid" data-jump><span>03 · Speltid</span><span>Live</span></a>
+      <div class="body">
         <div>
-          <h2>Ursäkten</h2>
-          <p>Ett frikort för sociala situationer. När det sociala batteriet är slut, eller du inte orkar bli övertalad att stanna, vill du inte behöva förklara varför du går.</p>
-          <p>I stället för att smita iväg utan att säga hej då får du en ursäkt levererad som sms.</p>
-          <div class="meta">
-            <span class="tag live">Live</span>
-            <a class="btn" href="https://ursakter.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
+          <p class="kicker">Fotboll · För ledare</p>
+          <h2>Speltid</h2>
+          <p class="lede">Mer tid för matchen, mindre tid på att räkna ut vem som ska spela var. Jämn speltid på olika positioner, formationer, resultat och påminnelser om byten.</p>
+          <a class="cta" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Planera en match ↗</a>
+        </div>
+        <div class="vis" aria-hidden="true">
+          <div class="plan">
+            <div class="pitch">
+              <span class="pl" style="left:50%;top:92%">1</span><span class="pl" style="left:18%;top:72%">2</span>
+              <span class="pl" style="left:50%;top:75%">3</span><span class="pl" style="left:82%;top:72%">4</span>
+              <span class="pl" style="left:30%;top:42%">5</span><span class="pl" style="left:70%;top:42%">6</span>
+              <span class="pl" style="left:50%;top:16%">7</span>
+            </div>
+            <div class="mins">
+              <h4>Speltid hittills</h4>
+              <div class="mrow">Alva<div class="t"><i style="width:80%"></i></div>24'</div>
+              <div class="mrow">Noah<div class="t"><i style="width:73%"></i></div>22'</div>
+              <div class="mrow">Elsa<div class="t"><i style="width:66%"></i></div>20'</div>
+              <div class="mrow">Liam<div class="t"><i style="width:40%"></i></div>12'</div>
+              <div class="mrow">Ines<div class="t"><i style="width:36%"></i></div>11'</div>
+              <div class="sub">⏱ Byte om 2 min: Liam in för Noah</div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </article>
 
-    <section class="win project" id="w-raketer" data-title="Sociala raketer" data-icon="i-rocket" data-x="0.52" data-y="0.48" data-w="470">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-rocket"/></svg></div>
+    <article class="card c-klotter" id="klotter" style="--i:3">
+      <a class="tabrow" href="#klotter" data-jump><span>04 · Klotterväggen</span><span>Pågår</span></a>
+      <div class="body">
         <div>
-          <h2>Sociala raketer</h2>
-          <p>Mitt mest ambitiösa projekt. Här lyfter jag fram det mest engagerande innehållet från svenska varumärken och organisationer som är aktiva på TikTok.</p>
-          <div class="meta">
-            <span class="tag live">Live</span>
-            <a class="btn" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Öppna ↗</a>
+          <p class="kicker">Experiment · Under arbete</p>
+          <h2>Klotter-<br>väggen</h2>
+          <p class="lede">En gemensam vägg där alla får rita – men pixlarna är begränsade. Slut på pixlar? Titta på en reklam för fem minuters fritt klotter, eller sponsra en plats på väggen.</p>
+          <p class="lede try" style="font-size:15px;opacity:.7"><span class="d">Prova här bredvid →</span><span class="m">Prova nedan ↓</span></p>
+        </div>
+        <div class="vis">
+          <div class="wall">
+            <canvas id="wall" width="64" height="40" aria-label="Rita på väggen"></canvas>
+            <div class="wall-bar">
+              <button class="sw on" style="background:#111" aria-label="Svart"></button>
+              <button class="sw" style="background:#1d3cff" aria-label="Blå"></button>
+              <button class="sw" style="background:#ff5a36" aria-label="Orange"></button>
+              <button class="sw" style="background:#00a37a" aria-label="Grön"></button>
+              <button class="sw" style="background:#ffd400" aria-label="Gul"></button>
+              <span class="left" id="left">200 pixlar kvar</span>
+            </div>
+            <div class="budget"><i id="budget"></i></div>
+            <div class="opts">
+              <div><b>▶ Titta på reklam</b>5 min obegränsat</div>
+              <div><b>★ Sponsra en plats</b>Din bild på väggen</div>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </article>
 
-    <!-- Projektmappen: en ikon per projekt, data-open = projektfönstrets id -->
-    <section class="win folder" id="w-projects" data-title="C:\Projekt" data-icon="i-folder" data-x="0.09" data-y="0.50" data-w="440">
-      <div class="panel">
-        <div class="folder-icons">
-          <button class="icon" data-open="w-raketer"><svg><use href="#i-rocket"/></svg><span>Sociala raketer</span></button>
-          <button class="icon" data-open="w-sanktan"><svg><use href="#i-ball"/></svg><span>Sanktan</span></button>
-          <button class="icon" data-open="w-ursakten"><svg><use href="#i-phone"/></svg><span>Ursäkten</span></button>
-          <button class="icon" data-open="w-rated"><svg><use href="#i-star"/></svg><span>Under/<wbr>overrated</span></button>
-          <button class="icon" data-open="w-fraga"><svg><use href="#i-chart"/></svg><span>Fråga svenskarna</span></button>
-        </div>
-      </div>
-      <div class="folder-status">5 objekt</div>
-    </section>
-
-    <!-- Fler projektfönster. Stängda från start, öppnas från mappen.
-         Pågående projekt kan ha <div class="player" data-progress="0–100">.
-         Projekt som inte är live har en knapp med data-soon som visar "Inte klart än". -->
-
-    <section class="win project" id="w-sanktan" data-title="Sanktan" data-icon="i-ball" data-x="0.20" data-y="0.10" data-w="460" hidden data-closed="1">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-ball"/></svg></div>
+    <article class="card c-om" id="om" style="--i:4">
+      <a class="tabrow" href="#om" data-jump><span>05 · Om</span><span>boven.se</span></a>
+      <div class="body">
         <div>
-          <h2>Sanktan</h2>
-          <p>Planera fotbollsmatchen. Fördela speltiden jämnt mellan olika positioner, håll koll på resultatet, välj formation och se när det är dags att byta spelare.</p>
-          <div class="meta">
-            <span class="tag live">Live</span>
-            <a class="btn" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Öppna ↗</a>
-          </div>
+          <p class="kicker">Om</p>
+          <h2>Bakom boven.se</h2>
+          <p class="lede">Här samlar jag mina digitala projekt – från lanserade tjänster till experiment som fortfarande växer fram. De flesta utgår från ett konkret behov, stort eller litet.</p>
         </div>
+        <div class="vis" aria-hidden="true"><div class="mark"><span>b<i>.</i></span></div></div>
       </div>
-    </section>
+    </article>
+  </main>
 
-
-    <section class="win project" id="w-fraga" data-title="Fråga svenskarna" data-icon="i-chart" data-x="0.24" data-y="0.18" data-w="460" hidden data-closed="1">
-      <div class="panel">
-        <div class="cell"><svg><use href="#i-chart"/></svg></div>
-        <div>
-          <h2>Fråga svenskarna</h2>
-          <p>Rapporten Svenskarna och internet 2026, fast mycket lättare att bläddra i och hitta data från.</p>
-          <div class="player" data-progress="40"></div>
-          <div class="meta">
-            <span class="tag">Pågår</span>
-            <!-- När projektet är live: <a class="btn" href="https://…" target="_blank" rel="noopener">Öppna ↗</a> -->
-            <button class="btn" data-soon>Öppna ↗</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="win paint" id="w-paint" data-title="Paint" data-icon="i-paint" data-x="0.30" data-y="0.20" data-w="520" hidden data-closed="1">
-      <div class="panel">
-        <div class="body">
-          <div class="toolbox" id="toolbox" role="toolbar" aria-label="Verktyg">
-            <button class="tool on" data-tool="pencil" title="Penna" aria-label="Penna"><svg><use href="#t-pencil"/></svg></button>
-            <button class="tool" data-tool="brush" title="Pensel" aria-label="Pensel"><svg><use href="#t-brush"/></svg></button>
-            <button class="tool" data-tool="eraser" title="Suddgummi" aria-label="Suddgummi"><svg><use href="#t-eraser"/></svg></button>
-            <button class="tool" data-tool="fill" title="Fyll" aria-label="Fyll"><svg><use href="#t-fill"/></svg></button>
-            <!-- stämplar läggs till här av skriptet -->
-          </div>
-          <div class="canvas-well"><canvas id="canvas" width="400" height="280" aria-label="Rityta"></canvas></div>
-        </div>
-        <div class="palette-row">
-          <div class="colors">
-            <button id="prev" title="Byt färg" aria-label="Föregående färg"></button>
-            <button id="current" title="Byt färg" aria-label="Nuvarande färg"></button>
-          </div>
-          <div class="palette" id="palette"></div>
-        </div>
-        <div class="statusbar" id="paint-status">Rita något! Prova stämplarna ✦</div>
-      </div>
-    </section>
-
-    <section class="win dialog" id="w-error" data-title="Fel" data-icon="i-drop" data-x="0.36" data-y="0.36" data-w="340" hidden data-closed="1">
-      <div class="panel">
-        <h2>Inte klart än</h2>
-        <p>Projektet är under konstruktion.<br>Kom tillbaka snart!</p>
-        <div class="actions"><button class="btn" data-dismiss>OK</button></div>
-      </div>
-    </section>
-
-    <noscript><p class="win panel">Slå på JavaScript för att flytta fönster och rita i Paint.</p></noscript>
-  </div>
-
-  <div class="startmenu" id="startmenu" hidden>
-    <div class="side">boven.se</div>
-    <ul id="startlist"></ul>
-  </div>
-
-  <footer class="taskbar">
-    <button class="start" id="start" aria-expanded="false" aria-controls="startmenu"><svg><use href="#i-spark" style="fill:#fff;stroke:#2f3a45;stroke-width:1.3"/></svg>Start</button>
-    <div class="tasks" id="tasks"></div>
-    <div class="tray" id="clock">--:--</div>
-  </footer>
+  <footer class="site-foot"><span>© 2026 boven.se</span><span>Byggd för hand</span></footer>
 
   <script>
   (() => {
-    const $ = (s, el = document) => el.querySelector(s);
-    const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-    const desktop = $('#desktop');
-    const wins = $$('.win[id]');
-    const isDialog = w => w.classList.contains('dialog');
-    const wide = matchMedia('(min-width: 760px)');
-    const svgUse = id => `<svg><use href="#${id}"/></svg>`;
-    let z = 10;
+    const cards = [...document.querySelectorAll('.card')];
 
-    /* ---------- Fönster ---------- */
-    wins.forEach(w => {
-      const bar = document.createElement('header');
-      bar.className = 'titlebar';
-      bar.innerHTML = `<span class="t">${w.dataset.title}</span>
-        ${isDialog(w) ? '' : `<button class="ctrl" data-act="min" aria-label="Minimera">${svgUse('c-min')}</button>`}
-        <button class="ctrl" data-act="close" aria-label="Stäng">${svgUse('c-close')}</button>`;
-      w.prepend(bar);
-      w.setAttribute('role', 'dialog');
-      w.setAttribute('aria-label', w.dataset.title);
-      w.addEventListener('pointerdown', () => focusWin(w));
-      bar.addEventListener('click', e => {
-        const act = e.target.closest('.ctrl')?.dataset.act;
-        if (act) hideWin(w, act === 'close');
-      });
-      $$('[data-dismiss]', w).forEach(b => b.onclick = () => hideWin(w, true));
-      drag(w, bar);
-    });
-
-    function focusWin(w) {
-      wins.forEach(o => o.classList.toggle('active', o === w));
-      w.style.zIndex = ++z;
-      refresh();
+    // Hoppa till ett kort: räkna ut var kortet ligger utan stapling och scrolla dit.
+    function naturalTop(card) {
+      const saved = cards.map(c => c.style.position);
+      cards.forEach(c => c.style.position = 'static');
+      const y = card.getBoundingClientRect().top + scrollY;
+      cards.forEach((c, i) => c.style.position = saved[i]);
+      return y - parseFloat(getComputedStyle(card).top || 0);
     }
-    function hideWin(w, close) {
-      w.hidden = true;
-      if (close) w.dataset.closed = '1';
-      refresh();
-    }
-    function openWin(id) {
-      const w = document.getElementById(id);
-      w.hidden = false; w.dataset.closed = '';
-      place(w);
-      focusWin(w);
-      if (!wide.matches) w.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    document.querySelectorAll('[data-jump]').forEach(a => a.addEventListener('click', e => {
+      const card = document.querySelector(a.getAttribute('href'));
+      if (!card) return;
+      e.preventDefault();
+      const top = getComputedStyle(card).position === 'sticky'
+        ? naturalTop(card)
+        : card.getBoundingClientRect().top + scrollY - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--top')) - 8;
+      scrollTo({ top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      history.replaceState(null, '', a.getAttribute('href'));
+    }));
 
-    // Varje fönster minns sin position som andel av skrivbordet (w.fx, w.fy).
-    // Visningen kläms in på skärmen, men den sparade positionen skrivs aldrig över,
-    // så fönstren hittar tillbaka när skärmen blir större igen.
-    const deskSize = () => [desktop.clientWidth, desktop.clientHeight - 52];
-    function place(w) {
-      if (!wide.matches) { w.style.left = w.style.top = w.style.width = ''; return; }
-      const [W, H] = deskSize();
-      w.style.width = Math.min(+w.dataset.w, W - 130) + 'px';
-      if (w.fx == null) { w.fx = Math.max(120 / W, +w.dataset.x); w.fy = +w.dataset.y; }
-      if (w.hidden) return;
-      w.style.left = Math.min(Math.max(w.fx * W, 0), Math.max(0, W - w.offsetWidth - 12)) + 'px';
-      w.style.top = Math.min(Math.max(w.fy * H, 0), Math.max(0, H - w.offsetHeight - 12)) + 'px';
-    }
-    function layout() {
-      document.documentElement.classList.toggle('floating', wide.matches);
-      wins.forEach(place);
-    }
-    function drag(w, handle) {
-      handle.addEventListener('pointerdown', e => {
-        if (!wide.matches || e.target.closest('.ctrl') || e.button > 0) return;
-        const sx = e.clientX - w.offsetLeft, sy = e.clientY - w.offsetTop;
-        handle.setPointerCapture(e.pointerId);
-        const move = ev => {
-          const [W, H] = deskSize();
-          w.style.left = Math.min(Math.max(ev.clientX - sx, 60 - w.offsetWidth), W - 60) + 'px';
-          w.style.top = Math.min(Math.max(ev.clientY - sy, 0), H - 40) + 'px';
-        };
-        const up = () => {
-          const [W, H] = deskSize();
-          w.fx = w.offsetLeft / W; w.fy = w.offsetTop / H;
-          handle.removeEventListener('pointermove', move); handle.removeEventListener('pointerup', up);
-        };
-        handle.addEventListener('pointermove', move);
-        handle.addEventListener('pointerup', up);
-      });
-    }
+    // Klotterväggen: en liten demo med begränsat antal pixlar.
+    const cv = document.getElementById('wall'), ctx = cv.getContext('2d');
+    const leftEl = document.getElementById('left'), budget = document.getElementById('budget');
+    const MAX = 200;
+    let color = '#111', left = MAX, drawing = false, last = null;
 
-    /* ---------- Projekt ---------- */
-    $$('.player').forEach(p => {
-      const n = Math.min(100, Math.max(0, +p.dataset.progress));
-      p.innerHTML = `<div class="slider"><i style="width:${n}%"></i><b style="left:${n}%"></b></div>
-        <div class="slider-labels"><span>${n}%</span><span>lansering</span></div>`;
-    });
-    $('#w-error').fx = null;
-    $$('[data-soon]').forEach(b => b.onclick = () => {
-      $('#w-error').fx = null; // börja på samma ställe varje gång
-      openWin('w-error');
-    });
+    // Några "tidigare besökares" pixlar och en sponsrad plats
+    ctx.fillStyle = '#1d3cff'; ctx.fillRect(48, 4, 12, 9);
+    ctx.fillStyle = '#fff';
+    [[51,7],[52,7],[53,7],[51,8],[51,9],[52,9],[53,9],[53,10],[51,11],[52,11],[53,11],[55,7],[56,7],[55,8],[56,8],[55,9],[56,9],[55,10],[56,10],[55,11],[56,11]]
+      .forEach(([x, y]) => ctx.fillRect(x, y, 1, 1));
+    [[8,8],[9,8],[10,8],[8,9],[10,9],[8,10],[9,10],[10,10]].forEach(([x, y]) => { ctx.fillStyle = '#1d3cff'; ctx.fillRect(x, y, 1, 1); });
+    [[40,28],[41,28],[42,29],[43,30],[44,30]].forEach(([x, y]) => { ctx.fillStyle = '#ff5a36'; ctx.fillRect(x, y, 1, 1); });
 
-    /* ---------- Ikoner ---------- */
-    $$('.icon').forEach(ic => {
-      ic.addEventListener('click', e => {
-        $$('.icon').forEach(o => o.classList.toggle('selected', o === ic));
-        // Skrivbordet: dubbelklick med mus. I mappar, med finger eller tangentbord: enkelklick
-        if (ic.closest('.win') || e.detail === 0 || e.detail >= 2 || !matchMedia('(pointer: fine)').matches) openWin(ic.dataset.open);
-      });
-    });
-    desktop.addEventListener('pointerdown', e => {
-      if (!e.target.closest('.icon')) $$('.icon').forEach(o => o.classList.remove('selected'));
-    });
-
-    /* ---------- Aktivitetsfält & Start ---------- */
-    const tasks = $('#tasks'), start = $('#start'), menu = $('#startmenu');
-    function refresh() {
-      tasks.innerHTML = '';
-      wins.filter(w => !w.dataset.closed && !isDialog(w)).forEach(w => {
-        const b = document.createElement('button');
-        b.className = 'task' + (!w.hidden && w.classList.contains('active') ? ' on' : '');
-        b.innerHTML = `${svgUse(w.dataset.icon)}<span>${w.dataset.title}</span>`;
-        b.title = w.dataset.title;
-        b.onclick = () => {
-          if (!w.hidden && w.classList.contains('active')) hideWin(w, false);
-          else openWin(w.id);
-        };
-        tasks.append(b);
-      });
-    }
-    $('#startlist').innerHTML = wins.filter(w => !isDialog(w)).map(w =>
-      `<li><button data-open="${w.id}">${svgUse(w.dataset.icon)}${w.dataset.title}</button></li>`
-    ).join('');
-    const toggleMenu = open => {
-      menu.hidden = !open; start.classList.toggle('on', open); start.setAttribute('aria-expanded', open);
-    };
-    start.onclick = e => { e.stopPropagation(); toggleMenu(menu.hidden); };
-    menu.onclick = e => { const b = e.target.closest('[data-open]'); if (b) { openWin(b.dataset.open); toggleMenu(false); } };
-    document.addEventListener('click', e => { if (!menu.contains(e.target)) toggleMenu(false); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
-
-    const clock = $('#clock');
-    const tick = () => clock.textContent = new Date().toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
-    tick(); setInterval(tick, 15000);
-
-    /* ---------- Paint ---------- */
-    const cv = $('#canvas'), ctx = cv.getContext('2d', { willReadFrequently: true });
-    const colors = ['#127f86','#4fa9a5','#2cc4b8','#6fdcc0','#9ee9c8','#d3f6e8','#2f3a45','#7fa7d9',
-                    '#f08a5d','#f5b38a','#ffd6aa','#ffe9a8','#eae8e1','#c9ced6','#ffffff','#6b7785'];
-    const stamps = ['i-star', 'i-sun', 'i-cloud', 'i-drop', 'i-ball', 'i-rocket'];
-    const stampSize = { 2: 32, 5: 52, 10: 84 };
-    let color = '#2f3a45', prev = '#19a3a6', tool = 'pencil', size = 2, last = null;
-    const status = $('#paint-status');
-
-    // Bakgrund: solnedgångsgradient som i resten av sajten
-    const bg = ctx.createLinearGradient(0, 0, 0, cv.height);
-    bg.addColorStop(0, '#ffd6aa'); bg.addColorStop(1, '#f39a72');
-    const clear = () => { ctx.fillStyle = bg; ctx.fillRect(0, 0, cv.width, cv.height); };
-    clear();
-
-    // Stämplar: ritas från samma SVG-ikoner som används på sidan
-    const stampImg = {};
-    const toolbox = $('#toolbox');
-    stamps.forEach(id => {
-      const sym = document.getElementById(id);
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${sym.getAttribute('viewBox')}" width="96" height="96">${sym.innerHTML}</svg>`;
-      const img = new Image();
-      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-      stampImg[id] = img;
-      const b = document.createElement('button');
-      b.className = 'tool'; b.dataset.tool = 'stamp:' + id; b.title = b.ariaLabel = 'Stämpel';
-      b.innerHTML = svgUse(id);
-      toolbox.append(b);
-    });
-    toolbox.insertAdjacentHTML('beforeend', `
-      <button class="tool" data-action="clear" title="Rensa" aria-label="Rensa">${svgUse('t-clear')}</button>
-      <button class="tool" data-action="save" title="Spara som PNG" aria-label="Spara som PNG">${svgUse('t-save')}</button>
-      <div class="sizes">
-        <button class="size on" data-size="2" aria-label="Liten"><i style="width:4px;height:4px"></i></button>
-        <button class="size" data-size="5" aria-label="Mellan"><i style="width:8px;height:8px"></i></button>
-        <button class="size" data-size="10" aria-label="Stor"><i style="width:13px;height:13px"></i></button>
-      </div>`);
-
-    const pal = $('#palette');
-    colors.forEach(c => {
-      const b = document.createElement('button');
-      b.className = 'swatch'; b.style.background = c; b.title = c; b.setAttribute('aria-label', 'Färg ' + c);
-      b.onclick = () => setColor(c);
-      pal.append(b);
-    });
-    function setColor(c) {
-      if (c !== color) prev = color;
-      color = c;
-      $('#current').style.background = color; $('#prev').style.background = prev;
-    }
-    setColor(color);
-    $('#prev').onclick = $('#current').onclick = () => setColor(prev);
-
-    $$('.tool[data-tool]').forEach(b => b.onclick = () => {
-      tool = b.dataset.tool;
-      $$('.tool[data-tool]').forEach(o => o.classList.toggle('on', o === b));
-      status.textContent = b.title;
-    });
-    $$('.size').forEach(b => b.onclick = () => {
-      size = +b.dataset.size;
-      $$('.size').forEach(o => o.classList.toggle('on', o === b));
-    });
-    $('[data-action="clear"]').onclick = () => { clear(); status.textContent = 'Rensat.'; };
-    $('[data-action="save"]').onclick = () => {
-      const a = document.createElement('a');
-      a.download = 'boven-paint.png';
-      a.href = cv.toDataURL('image/png');
-      a.click();
-      status.textContent = 'Sparad som boven-paint.png';
-    };
-
-    const pos = e => {
+    const cell = e => {
       const r = cv.getBoundingClientRect();
-      return [Math.floor((e.clientX - r.left) * cv.width / r.width), Math.floor((e.clientY - r.top) * cv.height / r.height)];
+      return [Math.floor((e.clientX - r.left) / r.width * cv.width), Math.floor((e.clientY - r.top) / r.height * cv.height)];
     };
-    function stroke(a, b) {
-      ctx.strokeStyle = tool === 'eraser' ? bg : color;
-      ctx.lineWidth = tool === 'pencil' ? size : tool === 'eraser' ? size * 3 : size * 2.5;
-      ctx.lineCap = ctx.lineJoin = 'round';
-      ctx.beginPath(); ctx.moveTo(a[0] + 0.5, a[1] + 0.5); ctx.lineTo(b[0] + 0.5, b[1] + 0.5); ctx.stroke();
+    function paint([x, y]) {
+      if (left <= 0 || x < 0 || y < 0 || x >= cv.width || y >= cv.height) return;
+      if (last && last[0] === x && last[1] === y) return;
+      last = [x, y];
+      ctx.fillStyle = color; ctx.fillRect(x, y, 1, 1);
+      left--;
+      leftEl.textContent = left ? `${left} pixlar kvar` : 'Slut på pixlar!';
+      budget.style.width = (left / MAX * 100) + '%';
     }
-    cv.addEventListener('pointerdown', e => {
-      if (e.button > 0) return;
-      const p = pos(e);
-      if (tool === 'fill') { fill(p[0], p[1], color); return; }
-      if (tool.startsWith('stamp:')) {
-        const s = stampSize[size];
-        ctx.drawImage(stampImg[tool.slice(6)], p[0] - s / 2, p[1] - s / 2, s, s);
-        return;
-      }
-      cv.setPointerCapture(e.pointerId);
-      last = p; stroke(p, p);
-    });
-    cv.addEventListener('pointermove', e => {
-      const p = pos(e);
-      status.textContent = `${Math.max(0, p[0])}, ${Math.max(0, p[1])}`;
-      if (!last) return;
-      stroke(last, p); last = p;
-    });
-    ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => last = null));
-
-    function fill(x, y, hex) {
-      const { width: W, height: H } = cv;
-      if (x < 0 || y < 0 || x >= W || y >= H) return;
-      const img = ctx.getImageData(0, 0, W, H), d = img.data;
-      const n = parseInt(hex.slice(1), 16), nc = [n >> 16, (n >> 8) & 255, n & 255];
-      const i0 = (y * W + x) * 4, tc = [d[i0], d[i0 + 1], d[i0 + 2]];
-      if (tc.every((v, k) => v === nc[k])) return;
-      const near = i => Math.abs(d[i] - tc[0]) + Math.abs(d[i + 1] - tc[1]) + Math.abs(d[i + 2] - tc[2]) < 96;
-      const seen = new Uint8Array(W * H), stack = [x + y * W];
-      while (stack.length) {
-        const p = stack.pop();
-        if (seen[p]) continue;
-        seen[p] = 1;
-        const i = p * 4;
-        if (!near(i)) continue;
-        d[i] = nc[0]; d[i + 1] = nc[1]; d[i + 2] = nc[2]; d[i + 3] = 255;
-        const px = p % W;
-        if (px > 0) stack.push(p - 1);
-        if (px < W - 1) stack.push(p + 1);
-        if (p >= W) stack.push(p - W);
-        if (p < W * (H - 1)) stack.push(p + W);
-      }
-      ctx.putImageData(img, 0, 0);
-    }
-
-    /* ---------- Kör ---------- */
-    layout();
-    wide.addEventListener('change', layout);
-    addEventListener('resize', () => wins.forEach(place));
-    focusWin($('#w-raketer'));
+    cv.addEventListener('pointerdown', e => { drawing = true; last = null; cv.setPointerCapture(e.pointerId); paint(cell(e)); });
+    cv.addEventListener('pointermove', e => { if (drawing) paint(cell(e)); });
+    ['pointerup', 'pointercancel'].forEach(t => cv.addEventListener(t, () => drawing = false));
+    document.querySelectorAll('.sw').forEach(b => b.addEventListener('click', () => {
+      color = b.style.background;
+      document.querySelectorAll('.sw').forEach(o => o.classList.toggle('on', o === b));
+    }));
   })();
   </script>
 </body>
