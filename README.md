@@ -4,6 +4,7 @@ Personlig sajt som visar mina projekt som staplade kort: varje projekt är ett s
 kort som glider upp över det förra när man scrollar. På mobil scrollar korten som vanligt.
 
 - `index.html` – hela sidan, en fil, ingen build, inga beroenden.
+- `img/` – skärmdumpar av projekten (WebP, ca 1200 px breda).
 - `fonts/` – Inter Tight och IBM Plex Mono (SIL Open Font License), självhostade så att inga anrop går till Google.
 - Vercel Web Analytics är inkopplat (cookiefritt).
 
