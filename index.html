@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>boven.se</title>
-  <meta name="description" content="boven.se – digitala projekt: Sociala raketer, Over/underrated, Speltid och Klotterväggen.">
+  <meta name="description" content="boven.se – digitala projekt: Sociala raketer, Over/Under, Speltid och Klotterväggen.">
   <meta name="theme-color" content="#f4f3ef">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%231d3cff'/><circle cx='11' cy='11' r='2.2' fill='%23fff'/></svg>">
   <link rel="preload" href="fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -110,16 +110,17 @@
     .shot.back { left: 0; top: 0; transform: rotate(-3deg); }
     .shot.front { right: 0; bottom: 0; transform: rotate(2deg); }
 
-    /* 02 Over/underrated */
-    .c-rated { background: var(--ink); color: #fff; }
-    .c-rated .cta { background: var(--blue); color: #fff; }
-    .votes { width: 100%; max-width: 480px; }
-    .votes .ends { display: flex; justify-content: space-between; font: 12px var(--mono); color: #999; margin-bottom: 4px; }
-    .vote { display: grid; grid-template-columns: 1fr 64px; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid #333; }
-    .vote b { font-size: 21px; font-weight: 700; }
-    .vote .pct { font-size: 22px; font-weight: 700; text-align: right; }
-    .meter { height: 10px; border-radius: 99px; background: #9cb0ff; margin-top: 8px; overflow: hidden; }
-    .meter i { display: block; height: 100%; background: var(--blue); }
+    /* 02 Over/Under – i produktens egna färger */
+    .c-rated { background: #111; color: #f2f0eb; }
+    .c-rated h2 .o { color: #2f5bff; }
+    .c-rated h2 .u { color: #ff5a1f; }
+    .c-rated .kicker { opacity: .6; }
+    .c-rated .cta { background: #f2f0eb; color: #111; }
+    .shots.wide { aspect-ratio: 1.5; }
+    .shot.dark { box-shadow: 0 0 0 1px #333, 0 30px 70px rgba(0,0,0,.6); }
+    .shot.dark .bar { background: #262626; }
+    .shot.dark .bar i { background: #444; }
+    .shot.dark .bar span { background: #111; color: #888; }
 
     /* 03 Speltid */
     .c-speltid { background: var(--green); color: #fff; }
@@ -195,7 +196,7 @@
     <h1>Jag bygger tjänster folk <span>faktiskt använder.</span></h1>
     <ul class="index">
       <li><a href="#raketer" data-jump>Sociala raketer <small>01 · Live</small></a></li>
-      <li><a href="#rated" data-jump>Over/underrated <small>02 · Live</small></a></li>
+      <li><a href="#rated" data-jump>Over/Under <small>02 · Live</small></a></li>
       <li><a href="#speltid" data-jump>Speltid <small>03 · Live</small></a></li>
       <li><a href="#klotter" data-jump>Klotterväggen <small>04 · Pågår</small></a></li>
     </ul>
@@ -228,22 +229,20 @@
     </article>
 
     <article class="card c-rated" id="rated" style="--i:1">
-      <a class="tabrow" href="#rated" data-jump><span>02 · Over/underrated</span><span>Live</span></a>
+      <a class="tabrow" href="#rated" data-jump><span>02 · Over/Under</span><span>Live</span></a>
       <div class="body">
         <div>
           <p class="kicker">Community · Omröstning</p>
-          <h2>Over/<br>under&shy;rated</h2>
-          <p class="lede">Vi listar tillsammans ut vad som är mest överskattat och mest underskattat. Vad som helst kan läggas till.</p>
+          <h2><span class="o">Over</span>/<br><span class="u">Under</span></h2>
+          <p class="lede">Är det överskattat eller underskattat? Rösta, låt saker mötas i dueller och se vad som hamnar överst. Vad som helst kan läggas till – listorna formas av alla tillsammans.</p>
           <a class="cta" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Rösta nu ↗</a>
         </div>
-        <div class="vis" aria-hidden="true">
-          <div class="votes">
-            <div class="ends"><span>← Underrated</span><span>Overrated →</span></div>
-            <div class="vote"><div><b>Surströmming</b><div class="meter"><i style="width:72%"></i></div></div><span class="pct">72%</span></div>
-            <div class="vote"><div><b>Måndagar</b><div class="meter"><i style="width:31%"></i></div></div><span class="pct">31%</span></div>
-            <div class="vote"><div><b>Ikea-köttbullar</b><div class="meter"><i style="width:58%"></i></div></div><span class="pct">58%</span></div>
-            <div class="vote"><div><b>Lösgodis</b><div class="meter"><i style="width:19%"></i></div></div><span class="pct">19%</span></div>
-            <span class="note">Exempel</span>
+        <div class="vis">
+          <div class="shots wide">
+            <figure class="shot dark back"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
+              <img src="img/over-under-topplista.webp" width="1200" height="612" alt="Over/Under: listorna över mest överskattat och mest underskattat" loading="lazy"></figure>
+            <figure class="shot dark front"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
+              <img src="img/over-under-rosta.webp" width="1200" height="615" alt="Over/Under: rösta om något är överskattat eller underskattat" loading="lazy"></figure>
           </div>
         </div>
       </div>

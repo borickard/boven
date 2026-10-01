@@ -19,7 +19,7 @@ kort som glider upp över det förra när man scrollar. På mobil scrollar korte
 | Projekt          | Status | Adress                             |
 | ---------------- | ------ | ---------------------------------- |
 | Sociala raketer  | Live   | https://www.socialaraketer.se/     |
-| Over/underrated  | Live   | https://overunderrated.vercel.app/ |
+| Over/Under       | Live   | https://overunderrated.vercel.app/ |
 | Speltid          | Live   | https://sanktan.vercel.app/ (speltid.nu på gång) |
 | Klotterväggen    | Pågår  | –                                  |
 
