@@ -57,7 +57,7 @@
       padding: calc(var(--top) + 72px) 40px 72px;
       display: grid; grid-template-columns: 1.45fr 1fr; gap: 48px; align-items: end;
     }
-    .hero h1 { font-size: clamp(42px, 5.6vw, 80px); line-height: .98; letter-spacing: -.03em; font-weight: 800; word-spacing: .04em; }
+    .hero h1 { font-size: clamp(48px, 6.6vw, 92px); line-height: .95; letter-spacing: -.03em; font-weight: 800; word-spacing: .04em; }
     .hero h1 span { color: var(--blue); }
     .index { list-style: none; border-top: 1.5px solid var(--ink); }
     .index a {
@@ -93,6 +93,7 @@
     .lede { font-size: 19px; max-width: 450px; margin-top: 22px; opacity: .92; }
     .cta { display: inline-block; margin-top: 26px; border-radius: 99px; padding: 12px 22px; font-weight: 700; transition: transform .15s; }
     .cta:hover { transform: translateY(-2px); }
+    .arr { width: .72em; height: .72em; margin-left: .15em; vertical-align: -.02em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .vis { position: relative; min-height: 0; display: flex; align-items: center; justify-content: center; }
     .note { display: block; margin-top: 10px; font: 12px var(--mono); opacity: .55; }
 
@@ -102,6 +103,11 @@
     .c-raketer h2 i { color: #ff2d55; font-style: normal; }
     .c-raketer .cta { background: #ff2d55; color: #fff; border-radius: 8px; letter-spacing: .02em; }
     .shots { position: relative; width: 100%; max-width: 620px; aspect-ratio: 1.25; }
+    a.shots { display: block; }
+    a.shots .shot { transition: transform .25s ease; }
+    a.shots:hover .shot.back { transform: rotate(-4deg) translateY(-4px); }
+    a.shots:hover .shot.front { transform: rotate(1deg) translateY(-8px); }
+    a.shots:focus-visible { outline: 3px solid currentColor; outline-offset: 8px; border-radius: 14px; }
     .shot { position: absolute; width: 80%; border-radius: 12px; overflow: hidden; background: #0b2239; box-shadow: 0 30px 70px rgba(0,0,0,.5); }
     .shot .bar { height: 26px; background: #e9edf2; display: flex; gap: 6px; align-items: center; padding: 0 12px; }
     .shot .bar i { width: 9px; height: 9px; border-radius: 50%; background: #c5ccd6; }
@@ -160,7 +166,7 @@
     .pp-status { display: flex; gap: 3px; margin-top: 3px; }
     .pp-status span { padding: 2px 6px; box-shadow: inset -1px -1px #fff, inset 1px 1px #808080; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pp-status span:first-child { flex: 1; }
-    .try .m { display: none; }
+    .try { font-size: 15px; opacity: .8; }
 
     /* 05 Om */
     .c-om { background: var(--stone); color: var(--ink); }
@@ -183,7 +189,7 @@
       .lede { font-size: 16px; margin-top: 12px; }
       .cta { margin-top: 16px; }
       .plan { grid-template-columns: 110px 1fr; gap: 12px; padding: 12px; }
-      .try .d { display: none; } .try .m { display: inline; }
+      .try .arr { transform: rotate(90deg); }
       .mark { font-size: 96px; max-width: 220px; }
       .pp-main { grid-template-columns: 1fr; }
       .pp-side { order: 2; }
@@ -203,7 +209,7 @@
   </header>
 
   <section class="hero">
-    <h1>Idéer jag inte kunde låta bli att förverkliga, <span>och fortfarande bygger på.</span></h1>
+    <h1>Idéer jag inte kunde låta bli <span>att förverkliga</span></h1>
     <ul class="index">
       <li><a href="#raketer" data-jump>Sociala raketer <small>01 · Live</small></a></li>
       <li><a href="#rated" data-jump>Over/Under <small>02 · Live</small></a></li>
@@ -225,15 +231,15 @@
           <p class="kicker">Mitt största projekt · TikTok</p>
           <h2>Sociala<br>raketer<i>.</i></h2>
           <p class="lede">Vad engagerar på TikTok? Veckans topplista över svenska varumärken och organisationer, rankad efter engagemang. Många företag finns på sociala medier – få skapar innehåll som faktiskt berör. Siffrorna avslöjar vem.</p>
-          <a class="cta" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Besök socialaraketer.se ↗</a>
+          <a class="cta" href="https://www.socialaraketer.se/" target="_blank" rel="noopener">Besök socialaraketer.se <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <div class="shots">
+          <a class="shots" href="https://www.socialaraketer.se/" target="_blank" rel="noopener" aria-label="Öppna Sociala raketer">
             <figure class="shot back"><div class="bar"><i></i><i></i><i></i><span>socialaraketer.se</span></div>
               <img src="img/sociala-raketer-start.webp" width="1200" height="788" alt="Startsidan på Sociala raketer: Vad engagerar på TikTok?" loading="lazy"></figure>
             <figure class="shot front"><div class="bar"><i></i><i></i><i></i><span>socialaraketer.se</span></div>
               <img src="img/sociala-raketer-topplista.webp" width="1200" height="831" alt="Veckans raketer – topplistan över de mest engagerande TikTok-klippen" loading="lazy"></figure>
-          </div>
+          </a>
         </div>
       </div>
     </article>
@@ -245,15 +251,15 @@
           <p class="kicker">Community · Omröstning</p>
           <h2><span class="o">Over</span>/<br><span class="u">Under</span></h2>
           <p class="lede">Är det överskattat eller underskattat? Rösta, låt saker mötas i dueller och se vad som hamnar överst. Vad som helst kan läggas till – listorna formas av alla tillsammans.</p>
-          <a class="cta" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Rösta nu ↗</a>
+          <a class="cta" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Rösta nu <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <div class="shots wide">
+          <a class="shots wide" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Over/Under">
             <figure class="shot dark back"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
               <img src="img/over-under-topplista.webp" width="1200" height="612" alt="Over/Under: listorna över mest överskattat och mest underskattat" loading="lazy"></figure>
             <figure class="shot dark front"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
               <img src="img/over-under-rosta.webp" width="1200" height="615" alt="Over/Under: rösta om något är överskattat eller underskattat" loading="lazy"></figure>
-          </div>
+          </a>
         </div>
       </div>
     </article>
@@ -265,15 +271,15 @@
           <p class="kicker">Fotboll · För ledare</p>
           <h2>Speltid<i>.</i></h2>
           <p class="lede">Mer tid för matchen, mindre tid på att räkna ut vem som ska spela var. Lägg in spelarna och vad de helst spelar, välj spelform och formation – Speltid gör en matchplan med jämn speltid, håller koll på klockan och resultatet och säger till när det är dags att byta.</p>
-          <a class="cta" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Planera en match ↗</a>
+          <a class="cta" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Planera en match <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <div class="shots">
+          <a class="shots" href="https://sanktan.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Speltid">
             <figure class="shot navy back"><div class="bar"><i></i><i></i><i></i><span>Matchplaneraren</span></div>
               <img src="img/speltid-planerare.webp" width="1200" height="857" alt="Speltid: matchplaneraren med spelare, preferenser och matchinställningar" loading="lazy"></figure>
             <figure class="shot navy front"><div class="bar"><i></i><i></i><i></i><span>Under matchen</span></div>
               <img src="img/speltid-match.webp" width="1200" height="857" alt="Speltid under matchen: klocka, resultat, uppställning och speltid per spelare" loading="lazy"></figure>
-          </div>
+          </a>
         </div>
       </div>
     </article>
@@ -285,7 +291,7 @@
           <p class="kicker">Experiment · Under arbete</p>
           <h2>Klotter-<br>väggen</h2>
           <p class="lede">En delad vägg på 1000 × 1000 pixlar där alla får rita – utan inloggning, men med ett begränsat antal pixlar. Slut på pixlar? Titta på en reklam för fem minuters fritt klotter, eller sponsra en yta med din logga som sedan skyddas i 30 dagar.</p>
-          <p class="lede try" style="font-size:15px;opacity:.8"><span class="d">Prova på ett utsnitt av den riktiga väggen →</span><span class="m">Prova på ett utsnitt av den riktiga väggen ↓</span></p>
+          <p class="lede try">Prova på ett utsnitt av den riktiga väggen <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3"/></svg></p>
         </div>
         <div class="vis">
           <div class="pp">
