@@ -1,4 +1,4 @@
-# boven.se
+# halvlek.se
 
 Personlig sajt som visar mina projekt som staplade kort: varje projekt är ett stort
 kort som glider upp över det förra när man scrollar. På mobil scrollar korten som vanligt.
@@ -19,8 +19,8 @@ kort som glider upp över det förra när man scrollar. På mobil scrollar korte
 | Projekt          | Status | Adress                             |
 | ---------------- | ------ | ---------------------------------- |
 | Sociala raketer  | Live   | https://www.socialaraketer.se/     |
-| Over/Under       | Live   | https://overunderrated.vercel.app/ |
-| Speltid          | Live   | https://sanktan.vercel.app/ (speltid.nu på gång) |
-| Klotterväggen    | Pågår  | –                                  |
+| Over/Under       | Live   | https://rated.halvlek.se/ |
+| Speltid          | Live   | https://speltid.halvlek.se/ |
+| Klotterväggen    | Pågår  | https://klotter.halvlek.se/        |
 
 Vilande, inte på sajten just nu: Fråga svenskarna, Ursäkten (https://ursakter.vercel.app/).

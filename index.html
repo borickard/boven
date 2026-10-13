@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>boven.se</title>
-  <meta name="description" content="boven.se – digitala projekt: Sociala raketer, Over/Under, Speltid och Klotterväggen.">
+  <title>halvlek.se</title>
+  <meta name="description" content="halvlek.se – digitala projekt: Sociala raketer, Over/Under, Speltid och Klotterväggen.">
   <meta name="theme-color" content="#f4f3ef">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' rx='4' fill='%231d3cff'/><circle cx='11' cy='11' r='2.2' fill='%23fff'/></svg>">
   <link rel="preload" href="fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -132,9 +132,13 @@
     .c-speltid { background: #f6c518; color: #111; }
     .c-speltid .kicker { opacity: .7; }
     .c-speltid .cta { background: #111; color: #f6c518; }
-    .phones { position: relative; display: block; width: 100%; max-width: 540px; aspect-ratio: 1.12; }
+    .phones { position: relative; display: block; width: 100%; max-width: 540px; aspect-ratio: 1.05; }
     .phone { position: absolute; top: 6%; width: 36%; padding: 5px; border-radius: 26px; background: #111; box-shadow: 0 24px 50px rgba(60,40,0,.35); transition: transform .25s ease; }
-    .phone img { display: block; width: 100%; height: auto; border-radius: 21px; }
+    .phone .screen { display: block; overflow: hidden; border-radius: 21px; background: #fff; container-type: inline-size; }
+    .phone img { display: block; width: 100%; height: auto; }
+    .sb { display: flex; align-items: center; justify-content: space-between; height: 11cqw; padding: 0 7cqw 0 9cqw; color: #111; font: 700 4.6cqw/1 var(--sans); }
+    .sb .island { width: 27cqw; height: 6.6cqw; border-radius: 99px; background: #111; }
+    .sb svg { width: 15cqw; height: 4.4cqw; }
     .phone.l { left: 0; transform: rotate(-7deg); }
     .phone.m { left: 32%; top: 0; z-index: 2; }
     .phone.r { right: 0; transform: rotate(7deg); }
@@ -145,6 +149,7 @@
 
     /* 04 Klotterväggen – demon ser ut som den riktiga väggen (ett gammalt ritprogram) */
     .c-klotter { background: #008080; color: #fff; }
+    .c-klotter .cta { background: #fff; color: #006b6b; margin-top: 18px; }
     .pp {
       width: 100%; max-width: 600px; background: #c0c0c0; color: #000;
       font: 12px/1.3 Tahoma, Verdana, "Segoe UI", sans-serif;
@@ -208,8 +213,15 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="sb-icons" viewBox="0 0 34 10">
+      <g fill="#111"><rect x="0" y="7" width="2" height="3" rx=".5"/><rect x="3" y="5" width="2" height="5" rx=".5"/><rect x="6" y="3" width="2" height="7" rx=".5"/><rect x="9" y="1" width="2" height="9" rx=".5"/></g>
+      <path d="M13.5 4.2a5.6 5.6 0 0 1 7 0M15 6a3.2 3.2 0 0 1 4 0" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round"/><circle cx="17" cy="8.3" r="1" fill="#111"/>
+      <rect x="23" y="1.2" width="9" height="7.6" rx="2" fill="none" stroke="#111" stroke-width="1"/><rect x="24.4" y="2.6" width="6.2" height="4.8" rx="1" fill="#111"/><rect x="32.6" y="3.8" width="1.2" height="2.4" rx=".5" fill="#111"/>
+    </symbol>
+  </svg>
   <header class="site-head">
-    <a class="logo" href="#">boven<i>.</i>se</a>
+    <a class="logo" href="#">halvlek<i>.</i>se</a>
     <nav><a href="#raketer" data-jump>Projekt</a><a href="#om" data-jump>Om</a></nav>
   </header>
 
@@ -256,13 +268,13 @@
           <p class="kicker">Community · Omröstning</p>
           <h2><span class="o">Over</span>/<br><span class="u">Under</span></h2>
           <p class="lede">Är det överskattat eller underskattat? Rösta, låt saker mötas i dueller och se vad som hamnar överst. Vad som helst kan läggas till – listorna formas av alla tillsammans.</p>
-          <a class="cta" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener">Rösta nu <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
+          <a class="cta" href="https://rated.halvlek.se/" target="_blank" rel="noopener">Rösta nu <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <a class="shots wide" href="https://overunderrated.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Over/Under">
-            <figure class="shot dark back"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
+          <a class="shots wide" href="https://rated.halvlek.se/" target="_blank" rel="noopener" aria-label="Öppna Over/Under">
+            <figure class="shot dark back"><div class="bar"><i></i><i></i><i></i><span>rated.halvlek.se</span></div>
               <img src="img/over-under-topplista.webp" width="1200" height="612" alt="Over/Under: listorna över mest överskattat och mest underskattat" loading="lazy"></figure>
-            <figure class="shot dark front"><div class="bar"><i></i><i></i><i></i><span>overunderrated.vercel.app</span></div>
+            <figure class="shot dark front"><div class="bar"><i></i><i></i><i></i><span>rated.halvlek.se</span></div>
               <img src="img/over-under-rosta.webp" width="1200" height="615" alt="Over/Under: rösta om något är överskattat eller underskattat" loading="lazy"></figure>
           </a>
         </div>
@@ -276,13 +288,13 @@
           <p class="kicker">Fotboll · För ledare</p>
           <h2>Speltid</h2>
           <p class="lede">Mer tid för matchen, mindre tid på att räkna ut vem som ska spela var. Lägg in spelarna och vad de helst spelar, välj spelform och formation – Speltid gör en matchplan med jämn speltid, håller koll på klockan och resultatet och säger till när det är dags att byta.</p>
-          <a class="cta" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Planera en match <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
+          <a class="cta" href="https://speltid.halvlek.se/" target="_blank" rel="noopener">Planera en match <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <a class="phones" href="https://sanktan.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Speltid">
-            <span class="phone l"><img src="img/speltid-installningar.webp" width="434" height="952" alt="Speltid: matchinställningar, formation och spelare" loading="lazy"></span>
-            <span class="phone m"><img src="img/speltid-uppstallning.webp" width="434" height="952" alt="Speltid: uppställning per period med byten och bänk" loading="lazy"></span>
-            <span class="phone r"><img src="img/speltid-klocka.webp" width="434" height="952" alt="Speltid: matchklocka, resultat och speltid per spelare" loading="lazy"></span>
+          <a class="phones" href="https://speltid.halvlek.se/" target="_blank" rel="noopener" aria-label="Öppna Speltid">
+            <span class="phone l"><span class="screen"><span class="sb"><b>9:41</b><i class="island"></i><svg viewBox="0 0 34 10"><use href="#sb-icons"/></svg></span><img src="img/speltid-installningar.webp" width="434" height="952" alt="Speltid: matchinställningar, formation och spelare" loading="lazy"></span></span>
+            <span class="phone m"><span class="screen"><span class="sb"><b>9:41</b><i class="island"></i><svg viewBox="0 0 34 10"><use href="#sb-icons"/></svg></span><img src="img/speltid-uppstallning.webp" width="434" height="952" alt="Speltid: uppställning per period med byten och bänk" loading="lazy"></span></span>
+            <span class="phone r"><span class="screen"><span class="sb"><b>9:41</b><i class="island"></i><svg viewBox="0 0 34 10"><use href="#sb-icons"/></svg></span><img src="img/speltid-klocka.webp" width="434" height="952" alt="Speltid: matchklocka, resultat och speltid per spelare" loading="lazy"></span></span>
           </a>
         </div>
       </div>
@@ -296,6 +308,7 @@
           <h2>Klotter-<br>väggen</h2>
           <p class="lede">En delad vägg på 1000 × 1000 pixlar där alla får rita – utan inloggning, men med ett begränsat antal pixlar. Slut på pixlar? Titta på en reklam för fem minuters fritt klotter, eller sponsra en yta med din logga som sedan skyddas i 30 dagar.</p>
           <p class="lede try">Prova på ett utsnitt av den riktiga väggen <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3"/></svg></p>
+          <a class="cta" href="https://klotter.halvlek.se/" target="_blank" rel="noopener">Börja klottra <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
           <div class="pp">
@@ -318,19 +331,19 @@
     </article>
 
     <article class="card c-om" id="om" style="--i:4">
-      <a class="tabrow" href="#om" data-jump><span>05 · Om</span><span>boven.se</span></a>
+      <a class="tabrow" href="#om" data-jump><span>05 · Om</span><span>halvlek.se</span></a>
       <div class="body">
         <div>
           <p class="kicker">Om</p>
-          <h2>Bakom boven.se</h2>
+          <h2>Bakom halvlek.se</h2>
           <p class="lede">Här samlar jag mina digitala projekt – från lanserade tjänster till experiment som fortfarande växer fram. De flesta utgår från ett konkret behov, stort eller litet.</p>
         </div>
-        <div class="vis" aria-hidden="true"><div class="mark"><span>b<i>.</i></span></div></div>
+        <div class="vis" aria-hidden="true"><div class="mark"><span>h<i>.</i></span></div></div>
       </div>
     </article>
   </main>
 
-  <footer class="site-foot"><span>© 2026 boven.se</span><span>Byggd för hand</span></footer>
+  <footer class="site-foot"><span>© 2026 halvlek.se</span><span>Byggd för hand</span></footer>
 
   <script>
   (() => {
