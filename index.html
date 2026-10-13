@@ -128,15 +128,20 @@
     .shot.dark .bar i { background: #444; }
     .shot.dark .bar span { background: #111; color: #888; }
 
-    /* 03 Speltid – i produktens egna färger */
-    .c-speltid { background: #141c2c; color: #eef2f7; }
-    .c-speltid .kicker { color: #8cc63f; opacity: 1; }
-    .c-speltid h2 i { color: #8cc63f; font-style: normal; }
-    .c-speltid .cta { background: #8cc63f; color: #141c2c; }
-    .shot.navy { box-shadow: 0 0 0 1px #2a3446, 0 30px 70px rgba(0,0,0,.55); }
-    .shot.navy .bar { background: #1f2939; }
-    .shot.navy .bar i { background: #3a4558; }
-    .shot.navy .bar span { background: #141c2c; color: #8592a6; }
+    /* 03 Speltid – i produktens egna färger: gult, svart och vitt */
+    .c-speltid { background: #f6c518; color: #111; }
+    .c-speltid .kicker { opacity: .7; }
+    .c-speltid .cta { background: #111; color: #f6c518; }
+    .phones { position: relative; display: block; width: 100%; max-width: 540px; aspect-ratio: 1.12; }
+    .phone { position: absolute; top: 6%; width: 36%; padding: 5px; border-radius: 26px; background: #111; box-shadow: 0 24px 50px rgba(60,40,0,.35); transition: transform .25s ease; }
+    .phone img { display: block; width: 100%; height: auto; border-radius: 21px; }
+    .phone.l { left: 0; transform: rotate(-7deg); }
+    .phone.m { left: 32%; top: 0; z-index: 2; }
+    .phone.r { right: 0; transform: rotate(7deg); }
+    a.phones:hover .phone.l { transform: rotate(-9deg) translateX(-6px); }
+    a.phones:hover .phone.m { transform: translateY(-8px); }
+    a.phones:hover .phone.r { transform: rotate(9deg) translateX(6px); }
+    a.phones:focus-visible { outline: 3px solid currentColor; outline-offset: 8px; border-radius: 14px; }
 
     /* 04 Klotterväggen – demon ser ut som den riktiga väggen (ett gammalt ritprogram) */
     .c-klotter { background: #008080; color: #fff; }
@@ -269,16 +274,15 @@
       <div class="body">
         <div>
           <p class="kicker">Fotboll · För ledare</p>
-          <h2>Speltid<i>.</i></h2>
+          <h2>Speltid</h2>
           <p class="lede">Mer tid för matchen, mindre tid på att räkna ut vem som ska spela var. Lägg in spelarna och vad de helst spelar, välj spelform och formation – Speltid gör en matchplan med jämn speltid, håller koll på klockan och resultatet och säger till när det är dags att byta.</p>
           <a class="cta" href="https://sanktan.vercel.app/" target="_blank" rel="noopener">Planera en match <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a>
         </div>
         <div class="vis">
-          <a class="shots" href="https://sanktan.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Speltid">
-            <figure class="shot navy back"><div class="bar"><i></i><i></i><i></i><span>Matchplaneraren</span></div>
-              <img src="img/speltid-planerare.webp" width="1200" height="857" alt="Speltid: matchplaneraren med spelare, preferenser och matchinställningar" loading="lazy"></figure>
-            <figure class="shot navy front"><div class="bar"><i></i><i></i><i></i><span>Under matchen</span></div>
-              <img src="img/speltid-match.webp" width="1200" height="857" alt="Speltid under matchen: klocka, resultat, uppställning och speltid per spelare" loading="lazy"></figure>
+          <a class="phones" href="https://sanktan.vercel.app/" target="_blank" rel="noopener" aria-label="Öppna Speltid">
+            <span class="phone l"><img src="img/speltid-installningar.webp" width="434" height="952" alt="Speltid: matchinställningar, formation och spelare" loading="lazy"></span>
+            <span class="phone m"><img src="img/speltid-uppstallning.webp" width="434" height="952" alt="Speltid: uppställning per period med byten och bänk" loading="lazy"></span>
+            <span class="phone r"><img src="img/speltid-klocka.webp" width="434" height="952" alt="Speltid: matchklocka, resultat och speltid per spelare" loading="lazy"></span>
           </a>
         </div>
       </div>
