@@ -16,11 +16,11 @@ kort som glider upp över det förra när man scrollar. På mobil scrollar korte
 
 ## Projekt
 
-| Projekt          | Status | Adress                             |
-| ---------------- | ------ | ---------------------------------- |
-| Sociala raketer  | Live   | https://www.socialaraketer.se/     |
-| Over/Under       | Live   | https://rated.halvlek.se/ |
-| Speltid          | Live   | https://speltid.halvlek.se/ |
-| Klotterväggen    | Pågår  | https://klotter.halvlek.se/        |
+| Projekt          | Status | Adress                             | Repo                       |
+| ---------------- | ------ | ---------------------------------- | -------------------------- |
+| Sociala raketer  | Live   | https://www.socialaraketer.se/     | `borickard/guldraketen`    |
+| Over/Under       | Live   | https://rated.halvlek.se/          | `borickard/overunderrated` |
+| Speltid          | Live   | https://speltid.halvlek.se/        | `borickard/Sanktan`        |
+| Klotterväggen    | Pågår  | https://klotter.halvlek.se/        | `borickard/klottervaggen`  |
 
 Vilande, inte på sajten just nu: Fråga svenskarna, Ursäkten (https://ursakter.vercel.app/).
