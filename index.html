@@ -185,7 +185,7 @@
     .c-om h2 { font-size: clamp(44px, 5vw, 72px); }
     .c-om .who { display: flex; align-items: center; gap: 22px; margin-top: 18px; }
     .c-om .who h2 { margin-top: 0; }
-    .portrait { width: 104px; height: 104px; flex: none; border-radius: 50%; background: rgba(255,255,255,.35); color: rgba(17,17,17,.55); display: grid; place-items: center; font: 600 13px var(--mono); }
+    .portrait { width: 104px; height: 104px; flex: none; border-radius: 50%; background: rgba(255,255,255,.35); color: rgba(17,17,17,.55); display: grid; place-items: center; font: 600 13px var(--mono); object-fit: cover; box-shadow: 0 10px 24px rgba(10,30,80,.25); }
     .brands { margin-top: 30px; padding-top: 18px; border-top: 1.5px solid var(--ink); max-width: 520px; }
     .brands p { font: 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(17,17,17,.65); }
     .brands ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; letter-spacing: -.03em; }
@@ -364,8 +364,7 @@
         <div>
           <p class="kicker">Om</p>
           <div class="who">
-            <!-- Byt platshållaren mot <img src="img/rickard.webp" alt="Rickard Berggren" class="portrait"> när bilden finns -->
-            <div class="portrait" aria-hidden="true">Foto</div>
+            <img class="portrait" src="img/rickard.webp" width="360" height="360" alt="Rickard Berggren">
             <h2>Rickard Berggren</h2>
           </div>
           <p class="lede">Jag arbetar i gränslandet mellan strategi och kreativt innehåll, med fokus på varumärkesbyggande i sociala medier och på webben – i dag på IQ-initiativet.</p>
