@@ -7,6 +7,8 @@ kort som glider upp över det förra när man scrollar. På mobil scrollar korte
 - `img/` – skärmdumpar av projekten (WebP, ca 1200 px breda).
 - `fonts/` – Inter Tight och IBM Plex Mono (SIL Open Font License), självhostade så att inga anrop går till Google.
 - Vercel Web Analytics är inkopplat (cookiefritt).
+- Kontaktformuläret skickar till Formspree (formulär `xrpeddpb`). Inställningar, mottagaradress och spamfilter hanteras på formspree.io.
+- Porträtt: lägg bilden i `img/` och byt `<div class="portrait">` i Om-kortet mot en `<img class="portrait">` (instruktion finns som kommentar i koden).
 
 ## Lägga till eller ändra ett projekt
 
