@@ -7,6 +7,7 @@ kort som glider upp över det förra när man scrollar. På mobil scrollar korte
 - `img/` – skärmdumpar av projekten (WebP, ca 1200 px breda).
 - `fonts/` – Inter Tight och IBM Plex Mono (SIL Open Font License), självhostade så att inga anrop går till Google.
 - Vercel Web Analytics är inkopplat (cookiefritt).
+- SEO: titel, beskrivning, canonical, Open Graph-delningsbild (`img/og.png`, 1200 × 630), strukturerad data (JSON-LD: person + projekt), `robots.txt` och `sitemap.xml`. Uppdatera `lastmod` i sitemap och JSON-LD när projekt läggs till.
 - Kontaktformuläret skickar till Formspree (formulär `xrpeddpb`). Inställningar, mottagaradress och spamfilter hanteras på formspree.io.
 - Föreläsningsbild: `img/forelasning-dentsu.webp` (Dentsu Creative, maj 2026).
 - Porträtt: `img/rickard.webp` (360 × 360, kvadratiskt beskuren). Byt filen för att uppdatera bilden.
