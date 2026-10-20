@@ -197,6 +197,13 @@
     .brands p { font: 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(17,17,17,.65); }
     .brands ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; letter-spacing: -.03em; }
     .c-om .vis { align-items: flex-start; }
+    .gigs { margin-top: 30px; padding-top: 18px; border-top: 1.5px solid var(--ink); max-width: 520px; }
+    .gigs .label { font: 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(17,17,17,.65); }
+    .gigs ul { list-style: none; margin-top: 10px; display: grid; gap: 4px; font-size: 19px; }
+    .gigs li { padding-left: 24px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6h8M7 3l3 3-3 3' fill='none' stroke='%231d3cff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat 0 .38em / 14px 14px; }
+    .gigs figure { margin-top: 18px; }
+    .gigs img { display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 16px 36px rgba(80,60,0,.18); }
+    .gigs figcaption { margin-top: 10px; font-size: 14px; line-height: 1.45; color: rgba(17,17,17,.7); }
     .contact { width: 100%; max-width: 480px; background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 20px 50px rgba(80,60,0,.12); }
     .contact h3 { font-size: 26px; letter-spacing: -.03em; }
     .contact > p { color: var(--muted); font-size: 15px; margin-top: 4px; }
@@ -400,6 +407,17 @@
           <div class="brands">
             <p>Varumärken jag jobbat med</p>
             <ul><li>IQ</li><li>Klarna</li><li>McDonald's</li><li>Blocket</li><li>IKEA</li><li>Försvarsmakten</li></ul>
+          </div>
+          <div class="gigs">
+            <p class="label">Tillgänglig för uppdrag</p>
+            <ul>
+              <li><b>Föreläsningar</b> om sociala medier och digital strategi</li>
+              <li><b>Styrelseuppdrag</b></li>
+            </ul>
+            <figure>
+              <img src="img/forelasning-dentsu.webp" width="1000" height="750" alt="Rickard Berggren föreläser på Dentsu Creative" loading="lazy">
+              <figcaption>Always-on och hur feed-first storytelling skapar samtal, inte kampanjer. Dentsu Creative, maj 2026.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="vis">
