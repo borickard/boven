@@ -222,6 +222,7 @@
     .contact .done { margin-top: 18px; padding: 18px; border-radius: 14px; background: #e9f7ef; color: #0b6b3a; font-weight: 600; }
 
     .site-foot { padding: 40px; display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
+    .site-foot a:hover { color: var(--ink); }
 
     /* ---------- Mobil: korten scrollar som vanligt, utan stapling ---------- */
     @media (max-width: 760px) {
@@ -403,8 +404,8 @@
         </div>
         <div class="vis">
           <div class="contact" id="kontakt">
-            <h3>Skicka ett meddelande</h3>
-            <p>Frågor, idéer eller bara hej – jag svarar så fort jag kan.</p>
+            <h3>Frågor på det?</h3>
+            <p>Skriv en rad om du har frågor, tankar eller bara vill säga hej. Vi hörs!</p>
             <!-- Formspree. Fungerar även utan JavaScript (vanlig POST); med JavaScript skickas det i bakgrunden. -->
             <form id="contact-form" action="https://formspree.io/f/xrpeddpb" method="POST" novalidate>
               <label>Namn<input type="text" name="name" autocomplete="name" required></label>
@@ -430,7 +431,7 @@
     </article>
   </main>
 
-  <footer class="site-foot"><span>© 2026 halvlek.se</span></footer>
+  <footer class="site-foot"><span>© 2026 halvlek.se</span><a href="https://www.linkedin.com/in/rickardberggren/" target="_blank" rel="noopener">LinkedIn <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a></footer>
 
   <script>
   (() => {
