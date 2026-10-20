@@ -188,16 +188,16 @@
     .try { font-size: 15px; opacity: .8; }
 
     /* 05 Om och kontakt. Sista kortet får växa på höjden så att formuläret får plats. */
-    .c-om { background: #6f9cf0; color: var(--ink); height: auto; }
+    .c-om { background: #f8efc8; color: var(--ink); height: auto; }
     .c-om h2 { font-size: clamp(44px, 5vw, 72px); }
     .c-om .who { display: flex; align-items: center; gap: 22px; margin-top: 6px; }
     .c-om .who h2 { margin-top: 0; }
-    .portrait { width: 104px; height: 104px; flex: none; border-radius: 50%; background: rgba(255,255,255,.35); color: rgba(17,17,17,.55); display: grid; place-items: center; font: 600 13px var(--mono); object-fit: cover; box-shadow: 0 10px 24px rgba(10,30,80,.25); }
+    .portrait { width: 104px; height: 104px; flex: none; border-radius: 50%; background: #ece2b6; color: rgba(17,17,17,.55); display: grid; place-items: center; font: 600 13px var(--mono); object-fit: cover; box-shadow: 0 10px 24px rgba(80,60,0,.2); }
     .brands { margin-top: 30px; padding-top: 18px; border-top: 1.5px solid var(--ink); max-width: 520px; }
     .brands p { font: 13px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: rgba(17,17,17,.65); }
     .brands ul { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; letter-spacing: -.03em; }
     .c-om .vis { align-items: flex-start; }
-    .contact { width: 100%; max-width: 480px; background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 20px 50px rgba(0,0,0,.08); }
+    .contact { width: 100%; max-width: 480px; background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 20px 50px rgba(80,60,0,.12); }
     .contact h3 { font-size: 26px; letter-spacing: -.03em; }
     .contact > p { color: var(--muted); font-size: 15px; margin-top: 4px; }
     .contact form { display: grid; gap: 14px; margin-top: 18px; }
@@ -213,9 +213,12 @@
     .form-status { font-size: 15px; }
     .form-status:empty { display: none; }
     .form-status.error { color: #d92d20; }
-    .contact .alt { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
-    .contact .alt a { color: #0a66c2; font-weight: 700; }
-    .contact .alt a:hover { text-decoration: underline; }
+    .contact .alt { margin-top: 20px; display: grid; gap: 14px; }
+    .contact .alt > span { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); }
+    .contact .alt > span::before, .contact .alt > span::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
+    .li { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 18px; border-radius: 99px; background: #0a66c2; color: #fff; font-weight: 700; transition: transform .15s, background .15s; }
+    .li:hover { background: #004182; transform: translateY(-2px); }
+    .li-logo { width: 22px; height: 22px; flex: none; }
     .contact .done { margin-top: 18px; padding: 18px; border-radius: 14px; background: #e9f7ef; color: #0b6b3a; font-weight: 600; }
 
     .site-foot { padding: 40px; display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
@@ -235,6 +238,7 @@
       .plan { grid-template-columns: 110px 1fr; gap: 12px; padding: 12px; }
       .try .arr { transform: rotate(90deg); }
       .portrait { width: 80px; height: 80px; }
+      .li .long { display: none; }
       .c-om .who { gap: 16px; }
       .contact { padding: 20px; }
       .pp-main { grid-template-columns: 1fr; }
@@ -412,7 +416,14 @@
               <button type="submit">Skicka <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8M7 3l3 3-3 3"/></svg></button>
               <p class="form-status" role="status" aria-live="polite"></p>
             </form>
-            <p class="alt">Hellre LinkedIn? <a href="https://www.linkedin.com/in/rickardberggren/" target="_blank" rel="noopener">Hitta mig där <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg></a></p>
+            <div class="alt">
+              <span>eller</span>
+              <a class="li" href="https://www.linkedin.com/in/rickardberggren/" target="_blank" rel="noopener">
+                <svg class="li-logo" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#fff"/><path d="M6.9 9.6h-2.6V19h2.6zM5.6 5.2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM19.7 13.7c0-2.6-1.4-4.3-3.7-4.3-1.3 0-2.2.7-2.6 1.4V9.6h-2.5V19h2.6v-4.7c0-1.2.4-2.3 1.8-2.3s1.6 1.3 1.6 2.4V19h2.6z" fill="#0a66c2"/></svg>
+                <span>Connecta<span class="long"> med mig</span> på LinkedIn</span>
+                <svg class="arr" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9l6-6M4 3h5v5"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
